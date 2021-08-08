@@ -1,11 +1,16 @@
 import MainRouter from './MainRouter/MainRouter';
+import { Provider } from 'react-redux';
+import { reduxStore } from './redux-store/reduxStore';
+
 import './App.css';
 
 function App() {
 	return (
-		<div className='App'>
-			<MainRouter />
-		</div>
+		<Provider store={reduxStore}>
+			<div className='App'>
+				<MainRouter />
+			</div>
+		</Provider>
 	);
 }
 

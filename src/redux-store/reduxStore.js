@@ -1,15 +1,14 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import { reducer } from '../components/Login/Login';
+import {
+	reducer,
+	initialState as logInInitialState,
+} from '../state-management/loginState';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
-	user: {
-		id: 1,
-		username: 'Greg',
-		email: '1@1.com',
-	},
+	logIn: logInInitialState,
 };
 
 export const reduxStore = createStore(

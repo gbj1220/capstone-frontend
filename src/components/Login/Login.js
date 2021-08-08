@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { addUserActionCreator } from '../../state-management/loginState';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -36,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
 	const classes = useStyles();
 
+	const dispatch = useDispatch();
+
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('');
+
 	return (
 		<Container component='main' maxWidth='xs'>
 			<CssBaseline />
@@ -46,7 +50,11 @@ export default function Login() {
 				<Typography component='h1' variant='h5'>
 					Sign up
 				</Typography>
-				<form className={classes.form} noValidate>
+				<form
+					className={classes.form}
+					noValidate
+					onSubmit={(e) => e.preventDefault()}
+				>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
@@ -57,6 +65,8 @@ export default function Login() {
 								label='Email Address'
 								name='email'
 								autoComplete='email'
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -68,6 +78,8 @@ export default function Login() {
 								id='username'
 								label='Username'
 								autoComplete='username'
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</Grid>
 
@@ -81,6 +93,8 @@ export default function Login() {
 								type='password'
 								id='password'
 								autoComplete='current-password'
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</Grid>
 					</Grid>
@@ -90,6 +104,11 @@ export default function Login() {
 						variant='contained'
 						color='primary'
 						className={classes.submit}
+						onClick={() =>
+							dispatch(
+								addUserActionCreator(email, username, password)
+							)
+						}
 					>
 						Sign Up
 					</Button>
@@ -98,5 +117,3 @@ export default function Login() {
 		</Container>
 	);
 }
-
-export const reducer = () => {};
