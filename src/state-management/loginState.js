@@ -4,26 +4,28 @@ export const ADD_USER_ACTION = 'codeImmersives/addUser';
 
 export const addUserActionCreator =
 	(email, username, password) => async (dispatch, getState) => {
-		let email;
-		let username;
-		let password;
-
 		try {
-			console.log(`====== before response ======`);
 			let response = await axios.post(
-				'http://localhost:4000/users/sign-up'
+				'http://localhost:4000/users/sign-up',
+				{
+					email,
+					username,
+					password,
+				}
 			);
-			let email = response;
+			console.log(response);
+
+			dispatch({
+				type: ADD_USER_ACTION,
+				payload: {
+					email,
+					username,
+					password,
+				},
+			});
 		} catch (error) {
 			console.log(error);
 		}
-
-		dispatch({
-			type: ADD_USER_ACTION,
-			payload: {
-				email,
-			},
-		});
 	};
 
 export const initialState = {
@@ -39,4 +41,5 @@ export const reducer = (state = initialState, action) => {
 				password: action.payload.password,
 			};
 	}
+	return state;
 };
