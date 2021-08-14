@@ -10,7 +10,7 @@ function useUsernameHook() {
 		setUsername(e.target.value);
 
 		const checkForSymbol = (target) => {
-			if (matches(target, /[!@#$%^&*()\[\],.?":;{}|<>]/g)) {
+			if (matches(target, /[!@#$%^&*()[\],.?":;{}|<>]/g)) {
 				setUsernameError(true);
 				setUsernameErrorMessage(
 					'Username can not contain special characters'
