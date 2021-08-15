@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import {
 	reducer,
 	initialState as logInState,
-} from '../state-management/loginState';
+} from '../state-management/signUpState';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

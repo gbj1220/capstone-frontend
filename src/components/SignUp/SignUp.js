@@ -1,4 +1,4 @@
-import { addUserActionCreator } from '../../state-management/loginState';
+import { addUserActionCreator } from '../../state-management/signUpState';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
