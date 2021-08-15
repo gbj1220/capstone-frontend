@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from '../components/Header/Header';
 
 import Login from '../components/Login/Login';
@@ -10,19 +10,17 @@ export default function MainRouter() {
 	return (
 		<div>
 			<Header />
-			<Router>
-				<Switch>
-					<Route exact path='/login'>
-						<Login />
-					</Route>
-					<Route exact path='/'>
-						<SignUp />
-					</Route>
-					<Route exact path='/users-recipes'>
-						<UsersRecipes />
-					</Route>
-				</Switch>
-			</Router>
+			<Switch>
+				<Route exact path='/login'>
+					<Login />
+				</Route>
+				<Route exact path='/'>
+					<SignUp />
+				</Route>
+				<Route exact path='/users-recipes'>
+					<UsersRecipes />
+				</Route>
+			</Switch>
 		</div>
 	);
 }

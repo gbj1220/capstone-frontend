@@ -1,7 +1,8 @@
-import { createTheme, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
+import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -35,7 +36,9 @@ export default function ButtonAppBar() {
 						<Typography variant='h6' className={classes.title}>
 							Recipe Finder
 						</Typography>
-						<Button className={classes.logInBtn}>Login</Button>
+						<Link to='/login'>
+							<Button className={classes.logInBtn}>Login</Button>
+						</Link>
 					</Toolbar>
 				</AppBar>
 			</ThemeProvider>
