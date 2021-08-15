@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
 	CssBaseline,
@@ -8,6 +8,9 @@ import {
 	Paper,
 	Grid,
 } from '@material-ui/core/';
+
+import { useDispatch } from 'react-redux';
+import { logInActionCreator } from '../../state-management/loginState';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -45,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
 export default function SignInSide() {
 	const classes = useStyles();
 
+	const dispatch = useDispatch();
+
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+
 	return (
 		<Grid container component='main' className={classes.root}>
 			<CssBaseline />
@@ -73,6 +81,8 @@ export default function SignInSide() {
 							name='email'
 							autoComplete='email'
 							autoFocus
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
 						/>
 						<TextField
 							variant='outlined'
@@ -84,6 +94,8 @@ export default function SignInSide() {
 							type='password'
 							id='password'
 							autoComplete='current-password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<Button
 							type='submit'
@@ -91,6 +103,9 @@ export default function SignInSide() {
 							variant='contained'
 							color='primary'
 							className={classes.submit}
+							onClick={() =>
+								dispatch(logInActionCreator(username, password))
+							}
 						>
 							Sign In
 						</Button>
