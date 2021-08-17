@@ -2,6 +2,10 @@ import axios from 'axios';
 
 export const ADD_USER_ACTION = 'codeImmersives/addUser';
 
+export const initialState = {
+	users: [],
+};
+
 export const addUserActionCreator =
 	(email, username, password) => async (dispatch) => {
 		try {
@@ -27,10 +31,6 @@ export const addUserActionCreator =
 			console.log(error);
 		}
 	};
-
-export const initialState = {
-	users: [],
-};
 
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {

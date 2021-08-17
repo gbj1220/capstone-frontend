@@ -10,6 +10,7 @@ export const initialState = {
 };
 
 export const logInActionCreator = (username, password) => async (dispatch) => {
+	//calling my backend to do checks and stuff on login info and log them in or not
 	try {
 		let response = await axios.post('http://localhost:4000/users/login', {
 			username,
@@ -28,6 +29,7 @@ export const logInActionCreator = (username, password) => async (dispatch) => {
 		console.log(e);
 	}
 };
+
 //creating a function to log the user out
 export const logoutActionCreator = (dispatch) => {
 	dispatch({

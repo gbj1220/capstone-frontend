@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux';
+import { callRecipeApiActionCreator } from '../../state-management/nonUserSearchState';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -27,7 +28,6 @@ export default function NotAuthHome() {
 
 	//setting an initial state for the usrInput
 	const [usrInput, setUsrInput] = useState('');
-	console.log(usrInput);
 
 	//returning a TextField with a button underneath so that a non-authorized user can search for a recipe
 	return (
@@ -45,6 +45,9 @@ export default function NotAuthHome() {
 					className={classes.submitBtn}
 					variant='contained'
 					color='primary'
+					onClick={() =>
+						dispatch(callRecipeApiActionCreator(usrInput))
+					}
 				>
 					Submit
 				</Button>
