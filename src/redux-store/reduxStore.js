@@ -1,18 +1,28 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import {
-	reducer,
-	initialState as logInState,
+	reducer as signUpReducer,
+	initialState as signUpState,
 } from '../state-management/signUpState';
+import {
+	reducer as loginReducer,
+	initialState as loginState,
+} from '../state-management/loginState';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
-	logInState,
+	signUp: signUpState,
+	login: loginState,
 };
 
+const rootReducer = combineReducers({
+	signUp: signUpReducer,
+	login: loginReducer,
+});
+
 export const reduxStore = createStore(
-	reducer,
+	rootReducer,
 	initialState,
 	composeEnhancers(applyMiddleware(thunk))
 );

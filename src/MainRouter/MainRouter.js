@@ -1,26 +1,23 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Header from '../components/Header/Header';
-
-import Login from '../components/Login/Login';
-import SignUp from '../components/SignUp/SignUp';
 import UsersRecipes from '../components/UsersRecipes/UsersRecipes';
+import NotAuthHome from '../components/Home/NotAuthHome';
+import AuthHome from '../components/Home/AuthHome';
+import Header from '../components/Header/Header';
+import SignUp from '../components/SignUp/SignUp';
+import Login from '../components/Login/Login';
+import { Route, Switch } from 'react-router-dom';
 
 export default function MainRouter() {
 	return (
-		<div>
+		<>
 			<Header />
 			<Switch>
-				<Route exact path='/login'>
-					<Login />
-				</Route>
-				<Route exact path='/'>
-					<SignUp />
-				</Route>
-				<Route exact path='/users-recipes'>
-					<UsersRecipes />
-				</Route>
+				<Route exact path='/users-recipes' component={UsersRecipes} />
+				<Route exact path='/sign-up' component={SignUp} />
+				<Route exact path='/login' component={Login} />
+				<Route exact path='/home' component={AuthHome} />
+				<Route exact path='/' component={NotAuthHome} />
 			</Switch>
-		</div>
+		</>
 	);
 }

@@ -8,9 +8,8 @@ import {
 	Paper,
 	Grid,
 } from '@material-ui/core/';
-
-import { useDispatch } from 'react-redux';
 import { logInActionCreator } from '../../state-management/loginState';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -49,6 +48,8 @@ export default function SignInSide() {
 	const classes = useStyles();
 
 	const dispatch = useDispatch();
+	const loginSelector = useSelector((state) => state.login);
+	console.log(loginSelector);
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -70,16 +71,20 @@ export default function SignInSide() {
 					<Typography component='h1' variant='h5'>
 						Sign in
 					</Typography>
-					<form className={classes.form} noValidate>
+					<form
+						className={classes.form}
+						noValidate
+						onSubmit={(e) => e.preventDefault()}
+					>
 						<TextField
 							variant='outlined'
 							margin='normal'
 							required
 							fullWidth
-							id='email'
-							label='Email Address'
-							name='email'
-							autoComplete='email'
+							id='username'
+							label='Username'
+							name='username'
+							autoComplete='username'
 							autoFocus
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
@@ -97,6 +102,7 @@ export default function SignInSide() {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
+
 						<Button
 							type='submit'
 							fullWidth
@@ -109,6 +115,7 @@ export default function SignInSide() {
 						>
 							Sign In
 						</Button>
+
 						<Grid container></Grid>
 					</form>
 				</div>
