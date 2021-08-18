@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from '../components/Axios/Axios';
 
 export const LOG_IN = 'codeImmersives/sign-in';
 export const LOG_OUT = 'codeImmersives/logout';
@@ -12,7 +12,7 @@ export const initialState = {
 export const logInActionCreator = (username, password) => async (dispatch) => {
 	//calling my backend to do checks and stuff on login info and log them in or not
 	try {
-		let response = await axios.post('http://localhost:4000/users/login', {
+		let response = await Axios.post('/users/login', {
 			username,
 			password,
 		});

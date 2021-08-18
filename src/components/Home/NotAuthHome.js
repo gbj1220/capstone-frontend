@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { logoutActionCreator } from '../../state-management/loginState';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, TextField } from '@material-ui/core';
-
-import { useDispatch } from 'react-redux';
 import { callRecipeApiActionCreator } from '../../state-management/nonUserSearchState';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -20,6 +18,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NotAuthHome() {
+	//setting a variable to useSelector function to grab the current state from the redux-store
+	const nonUserSearchState = useSelector((state) => state.nonUserSearch);
+	const searchedString = nonUserSearchState.searchedString;
+	const recipe = nonUserSearchState.recipe;
+	const label = nonUserSearchState.label;
+	const uri = nonUserSearchState.uri;
+	const ingredientList = nonUserSearchState.ingredientList;
+
+	console.log(`====== NON-USER SEARCH STATE======`);
+	console.log(nonUserSearchState);
+
+	console.log(`====== SEARCHED STRING ======`);
+	console.log(searchedString);
+
+	console.log(`====== RECIPE ======`);
+	console.log(recipe);
+
+	console.log(`====== LABEL ======`);
+	console.log(label);
+
+	console.log(`====== URI ======`);
+	console.log(uri);
+
+	console.log(`====== INGREDIENT LIST ======`);
+	console.log(ingredientList);
+
 	//material-ui object being set to a variable to be used to alter css in material-ui
 	const classes = useStyles();
 
@@ -52,6 +76,8 @@ export default function NotAuthHome() {
 					Submit
 				</Button>
 			</form>
+
+			<div>Show Search Results</div>
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from '../components/Axios/Axios';
 
 export const ADD_USER_ACTION = 'codeImmersives/addUser';
 
@@ -9,14 +9,11 @@ export const initialState = {
 export const addUserActionCreator =
 	(email, username, password) => async (dispatch) => {
 		try {
-			let response = await axios.post(
-				'http://localhost:4000/users/sign-up',
-				{
-					email,
-					username,
-					password,
-				}
-			);
+			let response = await Axios.post('/users/sign-up', {
+				email,
+				username,
+				password,
+			});
 			console.log(response);
 
 			dispatch({

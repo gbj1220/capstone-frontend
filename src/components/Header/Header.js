@@ -31,7 +31,7 @@ export default function ButtonAppBar() {
 	const classes = useStyles();
 
 	const authChecker = useSelector((state) => state.login.isAuth);
-	console.log(authChecker);
+	// console.log(authChecker);
 
 	const checkIfAuth = () => {
 		if (authChecker) {
