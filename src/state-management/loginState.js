@@ -4,7 +4,6 @@ export const LOG_IN = 'codeImmersives/sign-in';
 export const LOG_OUT = 'codeImmersives/logout';
 
 export const initialState = {
-	isAuth: false,
 	user: null,
 	jwtToken: null,
 };
@@ -12,11 +11,13 @@ export const initialState = {
 export const logInActionCreator = (username, password) => async (dispatch) => {
 	//calling my backend to do checks and stuff on login info and log them in or not
 	try {
+		console.log('sup');
 		let response = await Axios.post('/users/login', {
 			username,
 			password,
 		});
-
+		console.log(`====== RESPONSE ======`);
+		console.log(response);
 		dispatch({
 			type: LOG_IN,
 			payload: {

@@ -8,6 +8,8 @@ import MainRouter from './MainRouter/MainRouter';
 
 import './App.css';
 
+require('dotenv').config();
+
 const theme = createTheme({
 	palette: {
 		primary: {
