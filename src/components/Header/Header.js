@@ -1,7 +1,8 @@
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
+import { logoutActionCreator } from '../../state-management/loginState';
 import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
@@ -30,11 +31,12 @@ const theme = createTheme({
 export default function ButtonAppBar() {
 	const classes = useStyles();
 
-	const authChecker = useSelector((state) => state.login.isAuth);
-	// console.log(authChecker);
+	const token = localStorage.getItem('jwtToken');
+
+	const dispatch = useDispatch();
 
 	const checkIfAuth = () => {
-		if (authChecker) {
+		if (!token) {
 			return (
 				<div className={classes.root}>
 					<ThemeProvider theme={theme}>
@@ -47,7 +49,12 @@ export default function ButtonAppBar() {
 									Recipe Finder
 								</Typography>
 								<Link to='/'>
-									<Button className={classes.logOutBtn}>
+									<Button
+										className={classes.logOutBtn}
+										onClick={() =>
+											dispatch(logoutActionCreator)
+										}
+									>
 										Logout
 									</Button>
 								</Link>
@@ -68,11 +75,20 @@ export default function ButtonAppBar() {
 								>
 									Recipe Finder
 								</Typography>
-								<Link to='/login'>
-									<Button className={classes.logInBtn}>
-										Login
-									</Button>
-								</Link>
+								<div>
+									<Link to='/sign-up'>
+										<Button
+											className={classes.goToSignUpBtn}
+										>
+											Sign Up
+										</Button>
+									</Link>
+									<Link to='/login'>
+										<Button className={classes.logInBtn}>
+											Login
+										</Button>
+									</Link>
+								</div>
 							</Toolbar>
 						</AppBar>
 					</ThemeProvider>

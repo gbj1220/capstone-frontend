@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-	CssBaseline,
-	Typography,
-	TextField,
 	Button,
-	Paper,
+	CssBaseline,
 	Grid,
+	Paper,
+	TextField,
+	FormControl,
+	FormHelperText,
+	Typography,
 } from '@material-ui/core/';
 import { logInActionCreator } from '../../state-management/loginState';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -48,11 +52,28 @@ export default function SignInSide() {
 	const classes = useStyles();
 
 	const dispatch = useDispatch();
-	const loginSelector = useSelector((state) => state.login);
-	console.log(loginSelector);
+
+	//setting a variable to use the useHistory hook
+	const history = useHistory();
+
+	//grabbing jwtToken from the redux login state
+	const jwtToken = useSelector((state) => state.login.jwtToken);
+	console.log(`====== jwtToken ======`);
+	console.log(jwtToken);
+
+	//setting jwtToken to localStorage
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+
+	//
+	useEffect(() => {
+		if (jwtToken) {
+			history.push('/home');
+		} else {
+			history.push('/login');
+		}
+	}, [jwtToken]);
 
 	return (
 		<Grid container component='main' className={classes.root}>
@@ -74,21 +95,24 @@ export default function SignInSide() {
 					<form
 						className={classes.form}
 						noValidate
-						onSubmit={(e) => e.preventDefault()}
+						onSubmit={(event) => event.preventDefault()}
 					>
-						<TextField
-							variant='outlined'
-							margin='normal'
-							required
-							fullWidth
-							id='username'
-							label='Username'
-							name='username'
-							autoComplete='username'
-							autoFocus
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
-						/>
+						<FormControl>
+							<TextField
+								variant='outlined'
+								margin='normal'
+								required
+								fullWidth
+								id='username'
+								label='Username'
+								name='username'
+								autoComplete='username'
+								autoFocus
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
+							/>
+							<FormHelperText></FormHelperText>
+						</FormControl>
 						<TextField
 							variant='outlined'
 							margin='normal'
@@ -102,7 +126,6 @@ export default function SignInSide() {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-
 						<Button
 							type='submit'
 							fullWidth

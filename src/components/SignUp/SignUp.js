@@ -2,6 +2,8 @@ import { addUserActionCreator } from '../../state-management/signUpState';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import {
 	Avatar,
 	Button,
@@ -42,6 +44,13 @@ export default function Login() {
 	const classes = useStyles();
 
 	const dispatch = useDispatch();
+
+	const token = localStorage.getItem('jwtToken');
+	console.log(token);
+
+	const history = useHistory();
+	console.log(`====== HISTORY ======`);
+	console.log(history);
 
 	const [isError, setIsError] = useState(false);
 
@@ -141,21 +150,27 @@ export default function Login() {
 							</FormControl>
 						</Grid>
 					</Grid>
-					<Button
-						type='submit'
-						fullWidth
-						variant='contained'
-						color='primary'
-						className={classes.submit}
-						onClick={() =>
-							dispatch(
-								addUserActionCreator(email, username, password)
-							)
-						}
-						disabled={isError ? true : false}
-					>
-						Sign Up
-					</Button>
+					<Link to='/login'>
+						<Button
+							type='submit'
+							fullWidth
+							variant='contained'
+							color='primary'
+							className={classes.submit}
+							onClick={() =>
+								dispatch(
+									addUserActionCreator(
+										email,
+										username,
+										password
+									)
+								)
+							}
+							disabled={isError ? true : false}
+						>
+							Sign Up
+						</Button>
+					</Link>
 				</form>
 			</div>
 		</Container>

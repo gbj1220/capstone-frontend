@@ -14,14 +14,16 @@ export const addUserActionCreator =
 				username,
 				password,
 			});
+
+			console.log(`====== RESPONSE ======`);
 			console.log(response);
 
 			dispatch({
 				type: ADD_USER_ACTION,
 				payload: {
-					email,
-					username,
-					password,
+					email: response.email,
+					username: response.username,
+					password: response.password,
 				},
 			});
 		} catch (error) {
