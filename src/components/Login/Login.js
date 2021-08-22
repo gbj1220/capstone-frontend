@@ -70,7 +70,7 @@ export default function SignInSide() {
 		} else {
 			history.push('/login');
 		}
-	}, [jwtToken]);
+	}, [history, jwtToken]);
 
 	return (
 		<Grid container component='main' className={classes.root}>

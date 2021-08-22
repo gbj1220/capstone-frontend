@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 	},
-	logOutButton: {},
 }));
 
 const theme = createTheme({
@@ -48,16 +47,21 @@ export default function ButtonAppBar() {
 								>
 									Recipe Finder
 								</Typography>
-								<Link to='/'>
-									<Button
-										className={classes.logOutBtn}
-										onClick={() =>
-											dispatch(logoutActionCreator)
-										}
-									>
-										Logout
+								<div className={classes.twoButtons}>
+									<Button className={classes.logOutBtn}>
+										Favorites
 									</Button>
-								</Link>
+									<Link to='/'>
+										<Button
+											className={classes.logOutBtn}
+											onClick={() =>
+												dispatch(logoutActionCreator)
+											}
+										>
+											Logout
+										</Button>
+									</Link>
+								</div>
 							</Toolbar>
 						</AppBar>
 					</ThemeProvider>

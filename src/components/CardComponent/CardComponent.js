@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 import {
 	Button,
 	Card,
@@ -27,13 +28,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingTop: theme.spacing(8),
 		paddingBottom: theme.spacing(8),
 	},
-	card: {
-		height: '100%',
-		display: 'flex',
-		flexDirection: 'column',
-		margin: '20px',
-		justifyContent: 'center',
-	},
+	card: {},
 	cardMedia: {
 		paddingTop: '56.25%', // 16:9
 	},
@@ -51,6 +46,8 @@ export default function CardComponent(props) {
 
 	const history = useHistory();
 
+	const jwtToken = useSelector((state) => state.login.jwtToken);
+
 	console.log(`====== props label ======`);
 	console.log(props.hit.recipe.label);
 	const label = props.hit.recipe.label;
@@ -60,7 +57,7 @@ export default function CardComponent(props) {
 
 	return (
 		<>
-			<Card className={classes.card}>
+			<Card style={{ margin: '20px' }}>
 				<CardMedia
 					className={classes.cardMedia}
 					image={image}
@@ -70,16 +67,43 @@ export default function CardComponent(props) {
 					<Typography gutterBottom variant='h7' component='h5'>
 						{label}
 					</Typography>
-					<Typography>Some more text</Typography>
 				</CardContent>
 				<CardActions>
-					<Button
-						size='small'
-						color='primary'
-						onClick={() => history.push('/error')}
-					>
-						View Recipe
-					</Button>
+					{jwtToken ? (
+						<>
+							<Button
+								variant='outlined'
+								size='small'
+								color='primary'
+							>
+								View Recipe
+							</Button>
+							<Button
+								variant='outlined'
+								size='small'
+								color='primary'
+							>
+								Save to Favorites
+							</Button>
+						</>
+					) : (
+						<>
+							<Button
+								size='small'
+								color='primary'
+								onClick={() => history.push('/error')}
+							>
+								View Recipe
+							</Button>
+							<Button
+								size='small'
+								color='primary'
+								onClick={() => history.push('/error')}
+							>
+								Save to Favorites
+							</Button>
+						</>
+					)}
 				</CardActions>
 			</Card>
 		</>

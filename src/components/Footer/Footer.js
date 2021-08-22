@@ -4,8 +4,10 @@ import { AppBar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	appBar: {
-		top: 950,
+		top: 'auto',
 		bottom: 0,
+		height: 100,
+		backgroundColor: '#505050',
 	},
 }));
 
