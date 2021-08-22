@@ -31,12 +31,12 @@ const theme = createTheme({
 export default function ButtonAppBar() {
 	const classes = useStyles();
 
-	const token = localStorage.getItem('jwtToken');
+	const token = useSelector((state) => state.login.jwtToken);
 
 	const dispatch = useDispatch();
 
 	const checkIfAuth = () => {
-		if (!token) {
+		if (token) {
 			return (
 				<div className={classes.root}>
 					<ThemeProvider theme={theme}>

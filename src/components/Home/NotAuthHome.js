@@ -3,6 +3,7 @@ import { callRecipeApiActionCreator } from '../../state-management/nonUserSearch
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import IndividualCards from '../../components/IndividualCards/IndividualCards';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -18,32 +19,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NotAuthHome() {
-	//setting a variable to useSelector function to grab the current state from the redux-store
-	const nonUserSearchState = useSelector((state) => state.nonUserSearch);
-	const searchedString = nonUserSearchState.searchedString;
-	const recipe = nonUserSearchState.recipe;
-	const label = nonUserSearchState.label;
-	const uri = nonUserSearchState.uri;
-	const ingredientList = nonUserSearchState.ingredientList;
-
-	console.log(`====== NON-USER SEARCH STATE======`);
-	console.log(nonUserSearchState);
-
-	console.log(`====== SEARCHED STRING ======`);
-	console.log(searchedString);
-
-	console.log(`====== RECIPE ======`);
-	console.log(recipe);
-
-	console.log(`====== LABEL ======`);
-	console.log(label);
-
-	console.log(`====== URI ======`);
-	console.log(uri);
-
-	console.log(`====== INGREDIENT LIST ======`);
-	console.log(ingredientList);
-
 	//material-ui object being set to a variable to be used to alter css in material-ui
 	const classes = useStyles();
 
@@ -56,12 +31,17 @@ export default function NotAuthHome() {
 	//returning a TextField with a button underneath so that a non-authorized user can search for a recipe
 	return (
 		<div style={{ textAlign: 'center' }}>
-			<form className={classes.root} noValidate autoComplete='off'>
+			<form
+				className={classes.root}
+				noValidate
+				autoComplete='off'
+				onSubmit={(event) => event.preventDefault()}
+			>
 				<TextField
 					id='outlined-basic'
 					label='Outlined'
 					variant='outlined'
-					onChange={(e) => setUsrInput(e.target.value)}
+					onChange={(event) => setUsrInput(event.target.value)}
 				/>
 				<br />
 
@@ -77,7 +57,9 @@ export default function NotAuthHome() {
 				</Button>
 			</form>
 
-			<div>Show Search Results</div>
+			<div>
+				<IndividualCards />
+			</div>
 		</div>
 	);
 }

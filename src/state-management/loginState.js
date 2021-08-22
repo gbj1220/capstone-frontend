@@ -18,6 +18,7 @@ export const logInActionCreator = (username, password) => async (dispatch) => {
 			password,
 		});
 
+		//setting jwtToken into localStorage so that I can grab it and put it into redux state
 		localStorage.setItem('jwtToken', response.data.jwtToken);
 
 		dispatch({
@@ -25,6 +26,7 @@ export const logInActionCreator = (username, password) => async (dispatch) => {
 			payload: {
 				isAuth: true,
 				jwtToken: response.data.jwtToken,
+				error: response.data.error,
 				user: username,
 			},
 		});
@@ -34,7 +36,20 @@ export const logInActionCreator = (username, password) => async (dispatch) => {
 };
 
 //creating a function to log the user out
-export const logoutActionCreator = (dispatch) => {};
+export const logoutActionCreator = (dispatch) => {
+	try {
+		const removedToken = localStorage.removeItem('jwtToken');
+
+		dispatch({
+			type: LOG_OUT,
+			payload: {
+				removedToken,
+			},
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 //reducer to handle the users authorization
 export const reducer = (state = initialState, action) => {
@@ -44,6 +59,12 @@ export const reducer = (state = initialState, action) => {
 				isAuth: action.payload.isAuth,
 				user: action.payload.user,
 				jwtToken: action.payload.jwtToken,
+				error: action.payload.error,
+			};
+		case LOG_OUT:
+			return {
+				...state,
+				jwtToken: action.payload.removedToken,
 			};
 
 		default:

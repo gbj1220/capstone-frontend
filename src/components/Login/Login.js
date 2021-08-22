@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core/';
 import { logInActionCreator } from '../../state-management/loginState';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,15 +57,13 @@ export default function SignInSide() {
 
 	//grabbing jwtToken from the redux login state
 	const jwtToken = useSelector((state) => state.login.jwtToken);
-	console.log(`====== jwtToken ======`);
-	console.log(jwtToken);
 
-	//setting jwtToken to localStorage
-
+	//setting states for username and password to grab the users input
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
-	//
+	//make a function to check users username against their password
+
 	useEffect(() => {
 		if (jwtToken) {
 			history.push('/home');
@@ -97,12 +94,11 @@ export default function SignInSide() {
 						noValidate
 						onSubmit={(event) => event.preventDefault()}
 					>
-						<FormControl>
+						<FormControl fullWidth>
 							<TextField
 								variant='outlined'
 								margin='normal'
 								required
-								fullWidth
 								id='username'
 								label='Username'
 								name='username'
@@ -113,19 +109,23 @@ export default function SignInSide() {
 							/>
 							<FormHelperText></FormHelperText>
 						</FormControl>
-						<TextField
-							variant='outlined'
-							margin='normal'
-							required
-							fullWidth
-							name='password'
-							label='Password'
-							type='password'
-							id='password'
-							autoComplete='current-password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
+
+						<FormControl fullWidth>
+							<TextField
+								variant='outlined'
+								margin='normal'
+								required
+								name='password'
+								label='Password'
+								type='password'
+								id='password'
+								autoComplete='current-password'
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<FormHelperText></FormHelperText>
+						</FormControl>
+
 						<Button
 							type='submit'
 							fullWidth
