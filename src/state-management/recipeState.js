@@ -3,14 +3,13 @@ import Axios from '../components/Axios/Axios';
 export const SAVE_RECIPE = 'codeImmersives/saveRecipe';
 
 export const initialState = {
-	title: [],
-	link: [],
+	label: null,
+	recipeLink: null,
 };
-
-const jwtToken = localStorage.getItem('jwtToken');
 
 export const saveRecipeActionCreator =
 	(label, recipeLink) => async (dispatch, getState) => {
+		console.log(`====== saveRecipeActionCreator Ran ======`);
 		try {
 			const currentState = getState();
 			const jwtToken = currentState.login.jwtToken;
@@ -28,11 +27,15 @@ export const saveRecipeActionCreator =
 					},
 				}
 			);
-
+			// console.log(`====== response ======`);
+			// console.log(response);
+			// console.log(`====== response.data ======`);
+			console.log(response.data.newSavedRecipe);
 			dispatch({
 				type: SAVE_RECIPE,
 				payload: {
-					response,
+					label: response.data.newSavedRecipe.label,
+					recipeLink: response.data.newSavedRecipe.recipeLink,
 				},
 			});
 		} catch (error) {
@@ -45,8 +48,8 @@ export const reducer = (state = initialState, action) => {
 		case SAVE_RECIPE:
 			return {
 				...state,
-				title: [action.payload.response],
-				link: [action.payload.response],
+				label: action.payload.label,
+				recipeLink: action.payload.recipeLink,
 			};
 		default:
 			return state;
