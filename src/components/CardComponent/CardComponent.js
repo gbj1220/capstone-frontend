@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	Button,
 	Card,
@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 
 import './CardComponent.css';
+import { saveRecipeActionCreator } from '../../state-management/recipeState';
 
 const useStyles = makeStyles((theme) => ({
 	icon: {
@@ -47,17 +48,16 @@ export default function CardComponent(props) {
 
 	const history = useHistory();
 
+	const dispatch = useDispatch();
+
 	const jwtToken = useSelector((state) => state.login.jwtToken);
 
 	const label = props.hit.recipe.label;
 	const image = props.hit.recipe.image;
 	const recipeLink = props.hit.recipe.url;
-	// console.log(`====== props label ======`);
-	// console.log(props.hit.recipe.label);
-	// console.log(`====== props image ======`);
-	// console.log(props.hit.recipe.image);
-	// console.log(`====== recipe link ======`);
+	const recipeShareAs = props.hit.recipe.shareAs;
 	const linkString = String(recipeLink);
+	const shareString = String(recipeShareAs);
 
 	return (
 		<>
@@ -68,7 +68,7 @@ export default function CardComponent(props) {
 					title='Image title'
 				/>
 				<CardContent className={classes.cardContent}>
-					<Typography gutterBottom variant='h7' component='h5'>
+					<Typography gutterBottom variant='h5' component='h5'>
 						{label}
 					</Typography>
 				</CardContent>
@@ -89,6 +89,14 @@ export default function CardComponent(props) {
 								variant='outlined'
 								size='small'
 								color='primary'
+								onClick={() =>
+									dispatch(
+										saveRecipeActionCreator(
+											label,
+											recipeLink
+										)
+									)
+								}
 							>
 								Save to Favorites
 							</Button>

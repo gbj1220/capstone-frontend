@@ -13,6 +13,11 @@ import {
 	initialState as nonUserSearchState,
 } from '../state-management/nonUserSearchState';
 
+import {
+	reducer as saveRecipeReducer,
+	initialState as saveRecipeState,
+} from '../state-management/recipeState';
+
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -21,12 +26,14 @@ const initialState = {
 	signUp: signUpState,
 	login: loginState,
 	nonUserSearch: nonUserSearchState,
+	savedRecipes: saveRecipeState,
 };
 
 const rootReducer = combineReducers({
 	signUp: signUpReducer,
 	login: loginReducer,
 	nonUserSearch: nonUserSearchReducer,
+	savedRecipes: saveRecipeReducer,
 });
 
 export const reduxStore = createStore(
