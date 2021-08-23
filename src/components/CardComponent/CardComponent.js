@@ -8,6 +8,7 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
+	Link,
 	Typography,
 } from '@material-ui/core';
 
@@ -48,12 +49,15 @@ export default function CardComponent(props) {
 
 	const jwtToken = useSelector((state) => state.login.jwtToken);
 
-	console.log(`====== props label ======`);
-	console.log(props.hit.recipe.label);
 	const label = props.hit.recipe.label;
-	console.log(`====== props image ======`);
-	console.log(props.hit.recipe.image);
 	const image = props.hit.recipe.image;
+	const recipeLink = props.hit.recipe.url;
+	// console.log(`====== props label ======`);
+	// console.log(props.hit.recipe.label);
+	// console.log(`====== props image ======`);
+	// console.log(props.hit.recipe.image);
+	// console.log(`====== recipe link ======`);
+	const linkString = String(recipeLink);
 
 	return (
 		<>
@@ -75,8 +79,11 @@ export default function CardComponent(props) {
 								variant='outlined'
 								size='small'
 								color='primary'
+								onClick={() => {
+									window.open(linkString);
+								}}
 							>
-								View Recipe
+								Link to Recipe
 							</Button>
 							<Button
 								variant='outlined'

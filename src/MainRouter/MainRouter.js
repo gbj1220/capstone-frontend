@@ -1,5 +1,4 @@
 import React from 'react';
-import UsersRecipes from '../components/UsersRecipes/UsersRecipes';
 import ErrorPage from '../components/ErrorPage/ErrorPage';
 import NotAuthHome from '../components/Home/NotAuthHome';
 import AuthHome from '../components/Home/AuthHome';
@@ -26,11 +25,7 @@ export default function MainRouter() {
 			<Header />
 			<Switch>
 				<ThemeProvider theme={theme}>
-					<Route
-						exact
-						path='/users-recipes'
-						component={UsersRecipes}
-					/>
+					<Route exact path='' />
 					<Route exact path='/error' component={ErrorPage} />
 					<Route exact path='/sign-up' component={SignUp} />
 					<Route exact path='/login' component={Login} />
