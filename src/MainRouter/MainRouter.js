@@ -1,5 +1,6 @@
 import React from 'react';
 import FavoriteRecipes from '../components/FavoriteRecipes/FavoriteRecipes';
+import ErrorPage2 from '../components/ErrorPage/ErrorPage2';
 import ErrorPage from '../components/ErrorPage/ErrorPage';
 import NotAuthHome from '../components/Home/NotAuthHome';
 import AuthHome from '../components/Home/AuthHome';
@@ -32,6 +33,7 @@ export default function MainRouter() {
 						path='/favorites'
 						component={FavoriteRecipes}
 					/>
+					<Route exact path='/error2' component={ErrorPage2} />
 					<Route exact path='/error' component={ErrorPage} />
 					<Route exact path='/sign-up' component={SignUp} />
 					<Route exact path='/login' component={Login} />

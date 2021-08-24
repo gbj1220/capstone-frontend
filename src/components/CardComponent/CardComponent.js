@@ -111,7 +111,7 @@ export default function CardComponent(props) {
 							<Button
 								size='small'
 								color='primary'
-								onClick={() => history.push('/error')}
+								onClick={() => history.push('/error2')}
 							>
 								Save to Favorites
 							</Button>
