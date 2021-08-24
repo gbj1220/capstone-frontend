@@ -8,7 +8,6 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
-	Link,
 	Typography,
 } from '@material-ui/core';
 
@@ -55,7 +54,6 @@ export default function CardComponent(props) {
 	const label = props.hit.recipe.label;
 	const image = props.hit.recipe.image;
 	const recipeLink = props.hit.recipe.url;
-	const recipeShareAs = props.hit.recipe.shareAs;
 	const linkString = String(recipeLink);
 
 	return (

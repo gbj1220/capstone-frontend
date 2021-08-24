@@ -48,6 +48,7 @@ export default function ButtonAppBar() {
 								<Typography
 									variant='h6'
 									className={classes.title}
+									onClick={() => history.push('/home')}
 								>
 									Recipe Finder
 								</Typography>
@@ -89,6 +90,7 @@ export default function ButtonAppBar() {
 								<Typography
 									variant='h6'
 									className={classes.title}
+									onClick={() => history.push('/')}
 								>
 									Recipe Finder
 								</Typography>
