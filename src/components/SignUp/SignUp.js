@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router';
 import {
 	Button,
 	CssBaseline,
@@ -41,11 +40,6 @@ export default function Login() {
 	const dispatch = useDispatch();
 
 	const token = localStorage.getItem('jwtToken');
-	console.log(token);
-
-	const history = useHistory();
-	console.log(`====== HISTORY ======`);
-	console.log(history);
 
 	const [isError, setIsError] = useState(false);
 

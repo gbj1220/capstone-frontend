@@ -21,9 +21,11 @@ export default function Footer() {
 					color='primary'
 					className={classes.appBar}
 				>
-					<Typography variant='h6' align='center' gutterBottom>
-						Footer
-					</Typography>
+					<Typography
+						variant='h6'
+						align='center'
+						gutterBottom
+					></Typography>
 				</AppBar>
 			</footer>
 		</>

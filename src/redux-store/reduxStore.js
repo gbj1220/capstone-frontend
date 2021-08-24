@@ -18,6 +18,11 @@ import {
 	initialState as saveRecipeState,
 } from '../state-management/recipeState';
 
+import {
+	reducer as favoriteRecipesReducer,
+	initialState as favoriteRecipeState,
+} from '../state-management/favoriteRecipesState';
+
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,13 +32,15 @@ const initialState = {
 	login: loginState,
 	nonUserSearch: nonUserSearchState,
 	savedRecipes: saveRecipeState,
+	favoriteRecipes: favoriteRecipeState,
 };
 
 const rootReducer = combineReducers({
 	signUp: signUpReducer,
 	login: loginReducer,
 	nonUserSearch: nonUserSearchReducer,
-	savedRecipes: saveRecipeReducer,
+	mostRecentlyAddedRecipe: saveRecipeReducer,
+	favoriteRecipes: favoriteRecipesReducer,
 });
 
 export const reduxStore = createStore(

@@ -3,8 +3,10 @@ import { logoutActionCreator } from '../../state-management/loginState';
 import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { getRecipesActionCreator } from '../../state-management/favoriteRecipesState';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -34,6 +36,8 @@ export default function ButtonAppBar() {
 
 	const dispatch = useDispatch();
 
+	const history = useHistory();
+
 	const checkIfAuth = () => {
 		if (token) {
 			return (
@@ -48,9 +52,18 @@ export default function ButtonAppBar() {
 									Recipe Finder
 								</Typography>
 								<div className={classes.twoButtons}>
-									<Button className={classes.logOutBtn}>
-										Favorites
-									</Button>
+									<Link to='/favorites'>
+										<Button
+											className={classes.logOutBtn}
+											onClick={() =>
+												dispatch(
+													getRecipesActionCreator()
+												)
+											}
+										>
+											Favorites
+										</Button>
+									</Link>
 									<Link to='/'>
 										<Button
 											className={classes.logOutBtn}

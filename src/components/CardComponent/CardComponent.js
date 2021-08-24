@@ -57,10 +57,9 @@ export default function CardComponent(props) {
 	const recipeLink = props.hit.recipe.url;
 	const recipeShareAs = props.hit.recipe.shareAs;
 	const linkString = String(recipeLink);
-	const shareString = String(recipeShareAs);
 
 	return (
-		<>
+		<div key={props.index}>
 			<Card style={{ margin: '20px' }}>
 				<CardMedia
 					className={classes.cardMedia}
@@ -93,6 +92,7 @@ export default function CardComponent(props) {
 									dispatch(
 										saveRecipeActionCreator(
 											label,
+											image,
 											recipeLink
 										)
 									)
@@ -121,6 +121,6 @@ export default function CardComponent(props) {
 					)}
 				</CardActions>
 			</Card>
-		</>
+		</div>
 	);
 }

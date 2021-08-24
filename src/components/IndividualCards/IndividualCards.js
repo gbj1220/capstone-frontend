@@ -12,8 +12,8 @@ export default function IndividualCards() {
 	return (
 		<div>
 			<Box display='flex' flexWrap='wrap'>
-				{hits.map((hit) => {
-					return <CardComponent hit={hit} />;
+				{hits.map((hit, i) => {
+					return <CardComponent hit={hit} index={i} />;
 				})}
 			</Box>
 		</div>

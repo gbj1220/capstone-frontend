@@ -3,12 +3,15 @@ import Axios from '../components/Axios/Axios';
 export const SAVE_RECIPE = 'codeImmersives/saveRecipe';
 
 export const initialState = {
-	label: null,
-	recipeLink: null,
+	mainData: {
+		label: null,
+		image: null,
+		recipeLink: null,
+	},
 };
 
 export const saveRecipeActionCreator =
-	(label, recipeLink) => async (dispatch, getState) => {
+	(label, image, recipeLink) => async (dispatch, getState) => {
 		console.log(`====== saveRecipeActionCreator Ran ======`);
 		try {
 			const currentState = getState();
@@ -18,6 +21,7 @@ export const saveRecipeActionCreator =
 				'/users/save-recipe',
 				{
 					label,
+					image,
 					recipeLink,
 				},
 
@@ -27,14 +31,11 @@ export const saveRecipeActionCreator =
 					},
 				}
 			);
-			// console.log(`====== response ======`);
-			// console.log(response);
-			// console.log(`====== response.data ======`);
-			console.log(response.data.newSavedRecipe);
 			dispatch({
 				type: SAVE_RECIPE,
 				payload: {
 					label: response.data.newSavedRecipe.label,
+					image: response.data.newSavedRecipe.image,
 					recipeLink: response.data.newSavedRecipe.recipeLink,
 				},
 			});
@@ -48,8 +49,11 @@ export const reducer = (state = initialState, action) => {
 		case SAVE_RECIPE:
 			return {
 				...state,
-				label: action.payload.label,
-				recipeLink: action.payload.recipeLink,
+				mainData: {
+					label: action.payload.label,
+					image: action.payload.image,
+					recipeLink: action.payload.recipeLink,
+				},
 			};
 		default:
 			return state;
