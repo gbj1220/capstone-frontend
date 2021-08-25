@@ -32,7 +32,9 @@ const theme = createTheme({
 export default function ButtonAppBar() {
 	const classes = useStyles();
 
-	const token = useSelector((state) => state.login.jwtToken);
+	// const token = useSelector((state) => state.login.jwtToken);
+
+	const token = localStorage.getItem('jwtToken');
 
 	const dispatch = useDispatch();
 
