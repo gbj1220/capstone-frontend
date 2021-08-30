@@ -1,4 +1,6 @@
 import Axios from '../components/Axios/Axios';
+import { toast } from 'react-toastify';
+
 export const LOG_IN = 'codeImmersives/sign-in';
 export const LOG_OUT = 'codeImmersives/logout';
 
@@ -13,11 +15,13 @@ export const initialState = {
 export const logInActionCreator = (username, password) => async (dispatch) => {
 	//calling my backend to do checks and stuff on login info and log them in or not
 	try {
-		let response = await Axios.post('/users/login', {
+		const response = await Axios.post('/users/login', {
 			username,
 			password,
 		});
 
+		console.log(`====== response ======`);
+		console.log(response);
 		//setting jwtToken into localStorage so that I can grab it and put it into redux state
 		localStorage.setItem('jwtToken', response.data.jwtToken);
 
@@ -26,12 +30,18 @@ export const logInActionCreator = (username, password) => async (dispatch) => {
 			payload: {
 				isAuth: true,
 				jwtToken: response.data.jwtToken,
-				error: response.data.error,
 				user: username,
 			},
 		});
-	} catch (e) {
-		console.log(e);
+	} catch (err) {
+		toast.error(err.response.data.err, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+		});
 	}
 };
 
@@ -46,8 +56,8 @@ export const logoutActionCreator = (dispatch) => {
 				removedToken,
 			},
 		});
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		console.log(err);
 	}
 };
 
@@ -59,7 +69,6 @@ export const reducer = (state = initialState, action) => {
 				isAuth: action.payload.isAuth,
 				user: action.payload.user,
 				jwtToken: action.payload.jwtToken,
-				error: action.payload.error,
 			};
 		case LOG_OUT:
 			return {

@@ -39,8 +39,6 @@ export default function Login() {
 
 	const dispatch = useDispatch();
 
-	const token = localStorage.getItem('jwtToken');
-
 	const [isError, setIsError] = useState(false);
 
 	const { email, handleEmailOnChange, emailError, emailErrorMessage } =

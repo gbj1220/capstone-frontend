@@ -3,7 +3,6 @@ import { reduxStore } from './redux-store/reduxStore';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { green } from '@material-ui/core/colors';
-
 import MainRouter from './MainRouter/MainRouter';
 
 import './App.css';
@@ -23,13 +22,15 @@ const theme = createTheme({
 
 function App() {
 	return (
-		<Provider store={reduxStore}>
-			<ThemeProvider theme={theme}>
-				<div className='MainRouter'>
-					<MainRouter />
-				</div>
-			</ThemeProvider>
-		</Provider>
+		<>
+			<Provider store={reduxStore}>
+				<ThemeProvider theme={theme}>
+					<div className='MainRouter'>
+						<MainRouter />
+					</div>
+				</ThemeProvider>
+			</Provider>
+		</>
 	);
 }
 

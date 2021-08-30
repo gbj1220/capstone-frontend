@@ -13,6 +13,7 @@ import {
 import { logInActionCreator } from '../../state-management/loginState';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { ToastContainer } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -56,7 +57,7 @@ export default function SignInSide() {
 	const history = useHistory();
 
 	//grabbing jwtToken from the redux login state
-	const jwtToken = useSelector((state) => state.login.jwtToken);
+	const token = useSelector((state) => state.login.jwtToken);
 
 	//setting states for username and password to grab the users input
 	const [username, setUsername] = useState('');
@@ -65,12 +66,12 @@ export default function SignInSide() {
 	//make a function to check users username against their password
 
 	useEffect(() => {
-		if (jwtToken) {
+		if (token) {
 			history.push('/home');
 		} else {
 			history.push('/login');
 		}
-	}, [jwtToken]);
+	}, [token]);
 
 	return (
 		<Grid container component='main' className={classes.root}>
@@ -94,6 +95,8 @@ export default function SignInSide() {
 						noValidate
 						onSubmit={(e) => e.preventDefault()}
 					>
+						<ToastContainer />
+
 						<FormControl fullWidth>
 							<TextField
 								variant='outlined'
