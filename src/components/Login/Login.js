@@ -6,14 +6,12 @@ import {
 	Grid,
 	Paper,
 	TextField,
-	FormControl,
-	FormHelperText,
 	Typography,
 } from '@material-ui/core/';
 import { logInActionCreator } from '../../state-management/loginState';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -58,10 +56,14 @@ export default function SignInSide() {
 
 	//grabbing jwtToken from the redux login state
 	const token = useSelector((state) => state.login.jwtToken);
+	const errMsg = useSelector((state) => state.login.error.msg);
 
 	//setting states for username and password to grab the users input
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+
+	//make an error handling function that gets the error from the backend and set toast in the function. use Form control error={thisNewFunc}
+	function displayError() {}
 
 	//make a function to check users username against their password
 
@@ -90,44 +92,41 @@ export default function SignInSide() {
 					<Typography component='h1' variant='h5'>
 						Sign in
 					</Typography>
+
+					<span>{errMsg.length > 0 ? <h4>{errMsg}</h4> : null}</span>
+
 					<form
 						className={classes.form}
 						noValidate
 						onSubmit={(e) => e.preventDefault()}
 					>
-						<ToastContainer />
+						<TextField
+							variant='outlined'
+							margin='normal'
+							required
+							fullWidth
+							id='username'
+							label='Username'
+							name='username'
+							autoComplete='username'
+							autoFocus
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
 
-						<FormControl fullWidth>
-							<TextField
-								variant='outlined'
-								margin='normal'
-								required
-								id='username'
-								label='Username'
-								name='username'
-								autoComplete='username'
-								autoFocus
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-							/>
-							<FormHelperText></FormHelperText>
-						</FormControl>
-
-						<FormControl fullWidth>
-							<TextField
-								variant='outlined'
-								margin='normal'
-								required
-								name='password'
-								label='Password'
-								type='password'
-								id='password'
-								autoComplete='current-password'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-							/>
-							<FormHelperText></FormHelperText>
-						</FormControl>
+						<TextField
+							variant='outlined'
+							margin='normal'
+							required
+							fullWidth
+							name='password'
+							label='Password'
+							type='password'
+							id='password'
+							autoComplete='current-password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
 
 						<Button
 							type='submit'

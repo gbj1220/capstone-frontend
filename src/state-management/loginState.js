@@ -1,54 +1,53 @@
 import Axios from '../components/Axios/Axios';
+import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 
 export const LOG_IN = 'codeImmersives/sign-in';
 export const LOG_OUT = 'codeImmersives/logout';
+export const LOG_IN_ERROR = 'codeImmersives/logInError';
 
-const token = localStorage.getItem('jwtToken');
-
+//declaring the initial state
 export const initialState = {
-	isAuth: false,
 	user: null,
-	jwtToken: token,
+	jwtToken: null,
+	error: {
+		msg: '',
+		id: null,
+	},
 };
 
-export const logInActionCreator = (username, password) => async (dispatch) => {
-	//calling my backend to do checks and stuff on login info and log them in or not
-	try {
-		const response = await Axios.post('/users/login', {
-			username,
-			password,
-		});
+export const logInActionCreator =
+	(username, password) => async (dispatch, getState) => {
+		const state = getState();
+		//calling my backend to do checks and stuff on login info and log them in or not
+		try {
+			let response = await Axios.post('/users/login', {
+				username,
+				password,
+			});
 
-		console.log(`====== response ======`);
-		console.log(response);
-		//setting jwtToken into localStorage so that I can grab it and put it into redux state
-		localStorage.setItem('jwtToken', response.data.jwtToken);
-
-		dispatch({
-			type: LOG_IN,
-			payload: {
-				isAuth: true,
-				jwtToken: response.data.jwtToken,
-				user: username,
-			},
-		});
-	} catch (err) {
-		toast.error(err.response.data.err, {
-			position: 'top-center',
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-		});
-	}
-};
+			//setting jwtToken into localStorage so that I can grab it and put it into redux state
+			await localStorage.setItem('jwtToken', response.data.jwtToken);
+			await dispatch({
+				type: LOG_IN,
+				payload: {
+					jwtToken: response.data.jwtToken,
+					user: username,
+					error: {
+						msg: response.data.err,
+						id: uuidv4(),
+					},
+				},
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 //creating a function to log the user out
 export const logoutActionCreator = (dispatch) => {
 	try {
-		const removedToken = localStorage.removeItem('jwtToken');
+		let removedToken = localStorage.removeItem('jwtToken');
 
 		dispatch({
 			type: LOG_OUT,
@@ -66,9 +65,13 @@ export const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case LOG_IN:
 			return {
-				isAuth: action.payload.isAuth,
+				...state,
 				user: action.payload.user,
 				jwtToken: action.payload.jwtToken,
+				error: {
+					msg: action.payload.error.msg,
+					id: action.payload.error.id,
+				},
 			};
 		case LOG_OUT:
 			return {
