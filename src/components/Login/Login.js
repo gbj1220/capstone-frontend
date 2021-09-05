@@ -11,7 +11,6 @@ import {
 import { logInActionCreator } from '../../state-management/loginState';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

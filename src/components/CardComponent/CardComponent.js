@@ -29,12 +29,23 @@ const useStyles = makeStyles((theme) => ({
 		paddingTop: theme.spacing(8),
 		paddingBottom: theme.spacing(8),
 	},
-	card: {},
+	card: {
+		margin: '25px',
+		boxShadow: '0 2px 20px black',
+		borderRadius: '10px',
+		width: '400px',
+		height: '400px',
+	},
 	cardMedia: {
-		paddingTop: '56.25%', // 16:9
+		paddingTop: '56%',
 	},
 	cardContent: {
 		flexGrow: 1,
+	},
+	cardButtons: {
+		justifyContent: 'center',
+		alignContent: 'center',
+		margin: '25px',
 	},
 	footer: {
 		backgroundColor: theme.palette.background.paper,
@@ -58,7 +69,7 @@ export default function CardComponent(props) {
 
 	return (
 		<div key={props.index}>
-			<Card style={{ margin: '20px' }}>
+			<Card className={classes.card} style={{ margin: '20px' }}>
 				<CardMedia
 					className={classes.cardMedia}
 					image={image}
@@ -69,7 +80,7 @@ export default function CardComponent(props) {
 						{label}
 					</Typography>
 				</CardContent>
-				<CardActions>
+				<CardActions className={classes.cardButtons}>
 					{jwtToken ? (
 						<>
 							<Button

@@ -1,6 +1,5 @@
 import Axios from '../components/Axios/Axios';
 import { v4 as uuidv4 } from 'uuid';
-import { toast } from 'react-toastify';
 
 export const LOG_IN = 'codeImmersives/sign-in';
 export const LOG_OUT = 'codeImmersives/logout';
@@ -18,7 +17,6 @@ export const initialState = {
 
 export const logInActionCreator =
 	(username, password) => async (dispatch, getState) => {
-		const state = getState();
 		//calling my backend to do checks and stuff on login info and log them in or not
 		try {
 			let response = await Axios.post('/users/login', {

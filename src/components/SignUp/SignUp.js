@@ -69,6 +69,8 @@ export default function Login() {
 			: setIsError(true);
 	}, [email, password, username, emailError, usernameError, passwordError]);
 
+	useEffect(() => {}, []);
+
 	return (
 		<Container component='main' maxWidth='xs'>
 			<CssBaseline />

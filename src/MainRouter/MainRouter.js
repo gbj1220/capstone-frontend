@@ -10,11 +10,7 @@ import SignUp from '../components/SignUp/SignUp';
 import Login from '../components/Login/Login';
 import { ThemeProvider } from '@material-ui/styles';
 import { createTheme } from '@material-ui/core';
-
 import { Route, Switch } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function MainRouter() {
 	const theme = createTheme({
@@ -28,7 +24,6 @@ export default function MainRouter() {
 	return (
 		<>
 			<Header />
-			<ToastContainer />
 			<Switch>
 				<ThemeProvider theme={theme}>
 					<Route exact path='' />
