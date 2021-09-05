@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
+	errMsg: {
+		color: 'red',
+	},
 }));
 
 export default function SignInSide() {
@@ -61,9 +64,6 @@ export default function SignInSide() {
 	//setting states for username and password to grab the users input
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-
-	//make an error handling function that gets the error from the backend and set toast in the function. use Form control error={thisNewFunc}
-	function displayError() {}
 
 	//make a function to check users username against their password
 
@@ -93,7 +93,9 @@ export default function SignInSide() {
 						Sign in
 					</Typography>
 
-					<span>{errMsg.length > 0 ? <h4>{errMsg}</h4> : null}</span>
+					<div className={classes.errMsg}>
+						{errMsg && errMsg.length > 0 ? <h4>{errMsg}</h4> : null}
+					</div>
 
 					<form
 						className={classes.form}
