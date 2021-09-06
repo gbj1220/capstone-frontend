@@ -9,111 +9,99 @@ import React from 'react';
 import { getRecipesActionCreator } from '../../state-management/favoriteRecipesState';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	menuButton: {
-		marginRight: theme.spacing(2),
-	},
-	toolbar: {
-		display: 'flex',
-		justifyContent: 'space-between',
-	},
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 }));
 
 const theme = createTheme({
-	palette: {
-		primary: {
-			main: '#505050',
-		},
-	},
+  palette: {
+    primary: {
+      main: '#505050',
+    },
+  },
 });
 
 export default function ButtonAppBar() {
-	const classes = useStyles();
+  const classes = useStyles();
 
-	const token = useSelector((state) => state.login.jwtToken);
+  const token = useSelector((state) => state.login.jwtToken);
 
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	const history = useHistory();
+  const history = useHistory();
 
-	const checkIfAuth = () => {
-		if (token) {
-			return (
-				<div className={classes.root}>
-					<ThemeProvider theme={theme}>
-						<AppBar position='static'>
-							<Toolbar className={classes.toolbar}>
-								<Typography
-									variant='h6'
-									className={classes.title}
-									onClick={() => history.push('/home')}
-								>
-									Recipe Finder
-								</Typography>
-								<div className={classes.twoButtons}>
-									<Link to='/favorites'>
-										<Button
-											className={classes.logOutBtn}
-											onClick={() =>
-												dispatch(
-													getRecipesActionCreator()
-												)
-											}
-										>
-											Favorites
-										</Button>
-									</Link>
-									<Link to='/'>
-										<Button
-											className={classes.logOutBtn}
-											onClick={() =>
-												dispatch(logoutActionCreator)
-											}
-										>
-											Logout
-										</Button>
-									</Link>
-								</div>
-							</Toolbar>
-						</AppBar>
-					</ThemeProvider>
-				</div>
-			);
-		} else {
-			return (
-				<div className={classes.root}>
-					<ThemeProvider theme={theme}>
-						<AppBar position='static'>
-							<Toolbar className={classes.toolbar}>
-								<Typography
-									variant='h6'
-									className={classes.title}
-									onClick={() => history.push('/')}
-								>
-									Recipe Finder
-								</Typography>
-								<div>
-									<Link to='/sign-up'>
-										<Button
-											className={classes.goToSignUpBtn}
-										>
-											Sign Up
-										</Button>
-									</Link>
-									<Link to='/login'>
-										<Button className={classes.logInBtn}>
-											Login
-										</Button>
-									</Link>
-								</div>
-							</Toolbar>
-						</AppBar>
-					</ThemeProvider>
-				</div>
-			);
-		}
-	};
-	return checkIfAuth();
+  const checkIfAuth = () => {
+    if (token) {
+      return (
+        <div className={classes.root}>
+          <ThemeProvider theme={theme}>
+            <AppBar position='static'>
+              <Toolbar className={classes.toolbar}>
+                <Typography
+                  variant='h6'
+                  className={classes.title}
+                  onClick={() => history.push('/home')}
+                >
+                  Recipe Finder
+                </Typography>
+                <div className={classes.twoButtons}>
+                  <Link to='/favorites'>
+                    <Button
+                      className={classes.logOutBtn}
+                      onClick={() => dispatch(getRecipesActionCreator())}
+                    >
+                      Favorites
+                    </Button>
+                  </Link>
+                  <Link to='/'>
+                    <Button
+                      className={classes.logOutBtn}
+                      onClick={() => dispatch(logoutActionCreator)}
+                    >
+                      Logout
+                    </Button>
+                  </Link>
+                </div>
+              </Toolbar>
+            </AppBar>
+          </ThemeProvider>
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.root}>
+          <ThemeProvider theme={theme}>
+            <AppBar position='static'>
+              <Toolbar className={classes.toolbar}>
+                <Typography
+                  variant='h6'
+                  className={classes.title}
+                  onClick={() => history.push('/')}
+                >
+                  Recipe Finder
+                </Typography>
+                <div>
+                  <Link to='/sign-up'>
+                    <Button className={classes.goToSignUpBtn}>Sign Up</Button>
+                  </Link>
+                  <Link to='/login'>
+                    <Button className={classes.logInBtn}>Login</Button>
+                  </Link>
+                </div>
+              </Toolbar>
+            </AppBar>
+          </ThemeProvider>
+        </div>
+      );
+    }
+  };
+  return checkIfAuth();
 }
