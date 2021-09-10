@@ -9,7 +9,11 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 
 const theme = createTheme({
-    palette: {},
+    palette: {
+        primary: {
+            main: '#505050',
+        },
+    },
 });
 
 const useStyles = makeStyles(() => ({
