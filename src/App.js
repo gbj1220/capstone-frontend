@@ -12,7 +12,9 @@ require('dotenv').config();
 
 const theme = createTheme({
     palette: {
-        primary: {},
+        primary: {
+            main: red[400],
+        },
     },
 });
 
