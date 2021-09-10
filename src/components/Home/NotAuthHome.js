@@ -56,6 +56,7 @@ export default function NotAuthHome() {
                     <br />
 
                     <Button
+                        type='submit'
                         className={classes.submitBtn}
                         variant='contained'
                         color='primary'
