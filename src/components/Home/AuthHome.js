@@ -29,6 +29,9 @@ export default function AuthHome() {
             },
         },
     });
+
+    // const [isLoading, setIsLoading] = useState(false);
+
     return (
         <div style={{ textAlign: 'center' }}>
             <ThemeProvider theme={theme}>
