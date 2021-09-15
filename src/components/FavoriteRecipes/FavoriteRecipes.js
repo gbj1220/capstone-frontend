@@ -9,7 +9,10 @@ import {
     CardMedia,
     Typography,
 } from '@material-ui/core';
-import { getRecipesActionCreator } from '../../state-management/favoriteRecipesState';
+import {
+    getRecipesActionCreator,
+    removeRecipeActionCreator,
+} from '../../state-management/favoriteRecipesState';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -38,6 +41,15 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         objectFit: 'contain',
     },
+    buttons: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        margin: '10px',
+    },
+    content: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
 }));
 export default function FavoriteRecipes() {
     const classes = useStyles();
@@ -45,8 +57,7 @@ export default function FavoriteRecipes() {
     const recipesArr = useSelector(
         (state) => state.favoriteRecipes.mainData.favoriteRecipes
     );
-    console.log(`====== recipesArr ======`);
-    console.log(recipesArr);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -62,7 +73,6 @@ export default function FavoriteRecipes() {
                 justifyContent='center'
             >
                 {recipesArr.map((recipe, i) => {
-                    console.log(recipe.label);
                     return (
                         <Card
                             className={classes.card}
@@ -72,17 +82,30 @@ export default function FavoriteRecipes() {
                                 className={classes.cardMedia}
                                 image={recipe.image}
                             />
-                            <CardContent>
+                            <CardContent className={classes.content}>
                                 <Typography>{recipe.label}</Typography>
-                                <Button
-                                    variant='outlined'
-                                    size='small'
-                                    onClick={() =>
-                                        window.open(recipe.recipeLink)
-                                    }
-                                >
-                                    Go to Link
-                                </Button>
+                                <div className={classes.buttons}>
+                                    <Button
+                                        variant='outlined'
+                                        size='small'
+                                        onClick={() =>
+                                            window.open(recipe.recipeLink)
+                                        }
+                                    >
+                                        Go to Link
+                                    </Button>
+                                    <Button
+                                        variant='outlined'
+                                        size='small'
+                                        onClick={() =>
+                                            dispatch(
+                                                removeRecipeActionCreator()
+                                            )
+                                        }
+                                    >
+                                        Remove from Favorites
+                                    </Button>
+                                </div>
                             </CardContent>
                         </Card>
                     );

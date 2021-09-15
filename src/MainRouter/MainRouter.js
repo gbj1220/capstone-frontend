@@ -1,6 +1,9 @@
 import React from 'react';
 import { createTheme } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const FavoriteRecipes = React.lazy(() =>
     import('../components/FavoriteRecipes/FavoriteRecipes')
@@ -30,6 +33,7 @@ export default function MainRouter() {
     return (
         <>
             <Header />
+            <ToastContainer />
             <Switch>
                 <Route exact path='/favorites' component={FavoriteRecipes} />
                 <Route exact path='/sign-up' component={SignUp} />

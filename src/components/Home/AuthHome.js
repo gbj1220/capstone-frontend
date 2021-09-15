@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { callRecipeApiActionCreator } from '../../state-management/nonUserSearchState';
+import React, { useState, Suspense } from 'react';
+import { callRecipeApiActionCreator } from '../../state-management/searchState';
 import { useDispatch } from 'react-redux';
 import { Button, TextField, ThemeProvider } from '@material-ui/core';
 import { createTheme, makeStyles } from '@material-ui/core';
@@ -30,10 +30,11 @@ export default function AuthHome() {
         },
     });
 
-    // const [isLoading, setIsLoading] = useState(false);
-
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div
+            style={{ textAlign: 'center' }}
+            onSubmit={(e) => e.preventDefault()}
+        >
             <ThemeProvider theme={theme}>
                 <form
                     className={classes.root}
@@ -61,7 +62,6 @@ export default function AuthHome() {
                     </Button>
                 </form>
             </ThemeProvider>
-
             <div>
                 <IndividualCards />
             </div>

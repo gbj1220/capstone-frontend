@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { callRecipeApiActionCreator } from '../../state-management/nonUserSearchState';
+import { callRecipeApiActionCreator } from '../../state-management/searchState';
 import { useDispatch } from 'react-redux';
 import { Button, TextField, ThemeProvider } from '@material-ui/core';
 import { createTheme, makeStyles } from '@material-ui/core';
@@ -27,7 +27,6 @@ export default function NotAuthHome() {
 
     //setting an initial state for the usrInput
     const [usrInput, setUsrInput] = useState('');
-    const [clickedSubmit, setClickedSubmit] = useState('false');
 
     const theme = createTheme({
         palette: {
@@ -61,8 +60,7 @@ export default function NotAuthHome() {
                         variant='contained'
                         color='primary'
                         onClick={() =>
-                            dispatch(callRecipeApiActionCreator(usrInput)) &&
-                            setClickedSubmit(true)
+                            dispatch(callRecipeApiActionCreator(usrInput))
                         }
                     >
                         Submit

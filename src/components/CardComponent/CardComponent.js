@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Modal } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import {
     CardMedia,
     Typography,
 } from '@material-ui/core';
+import { toast } from 'react-toastify';
 
 import './CardComponent.css';
 import { saveRecipeActionCreator } from '../../state-management/recipeState';
@@ -67,6 +68,19 @@ export default function CardComponent(props) {
     const recipeLink = props.hit.recipe.url;
     const linkString = String(recipeLink);
 
+    function handleOnClick(label, image, recipeLink) {
+        dispatch(saveRecipeActionCreator(label, image, recipeLink));
+        toast('Added to favorite recipes!', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
     return (
         <div key={props.index}>
             <Card className={classes.card} style={{ margin: '20px' }}>
@@ -98,13 +112,7 @@ export default function CardComponent(props) {
                                 size='small'
                                 color='primary'
                                 onClick={() =>
-                                    dispatch(
-                                        saveRecipeActionCreator(
-                                            label,
-                                            image,
-                                            recipeLink
-                                        )
-                                    )
+                                    handleOnClick(label, image, recipeLink)
                                 }
                             >
                                 Save to Favorites
