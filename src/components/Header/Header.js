@@ -33,6 +33,15 @@ const useStyles = makeStyles(() => ({
         border: '2px solid #78FFF1',
         marginRight: '5px',
     },
+    favorites_btn: {
+        color: '#78FFF1',
+        border: '2px solid #78FFF1',
+        marginRight: '5px',
+    },
+    logout_btn: {
+        color: '#78FFF1',
+        border: '2px solid #78FFF1',
+    },
     logInBtn: {
         color: '#78FFF1',
         border: '2px solid #78FFF1',
@@ -62,7 +71,7 @@ export default function ButtonAppBar() {
                             </Button>
                             <div className={classes.twoButtons}>
                                 <Button
-                                    className={classes.logOutBtn}
+                                    className={classes.favorites_btn}
                                     onClick={() =>
                                         dispatch(getRecipesActionCreator()) &&
                                         history.push('/favorites')
@@ -71,7 +80,7 @@ export default function ButtonAppBar() {
                                     Favorites
                                 </Button>
                                 <Button
-                                    className={classes.logOutBtn}
+                                    className={classes.logout_btn}
                                     onClick={() =>
                                         dispatch(logoutActionCreator) &&
                                         history.push('/')
