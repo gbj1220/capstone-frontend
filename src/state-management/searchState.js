@@ -11,19 +11,22 @@ console.log(prevHit);
 //creating an initialState for searchState to utilize
 export const initialState = {
     mainData: {
-        hits: prevHit,
+        hits: prevHit ? prevHit : [],
     },
 };
 
 export const callRecipeApiActionCreator = (usrInput) => async (dispatch) => {
     try {
+        console.log(`hello there sir ${usrInput}!`);
         let response = await Axios.post('/users/get-recipe-data', {
             usrInput,
         });
-        // console.log(`====== response ======`);
-        // console.log(response);
+        console.log(`====== response ======`);
+        console.log(response);
 
         let hits = response.data.data.hits;
+        console.log(`====== hits ======`);
+        console.log(hits);
 
         localStorage.setItem('currentSearch', JSON.stringify(hits));
 
