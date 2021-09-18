@@ -48,6 +48,22 @@ const useStyles = makeStyles((theme) => ({
         alignContent: 'center',
         margin: '25px',
     },
+    save_btn: {
+        border: '2px solid red',
+        borderRadius: '10px',
+        '&:hover': {
+            border: '2px solid white',
+            borderRadius: '10px',
+        },
+    },
+    link_btn: {
+        border: '2px solid red',
+        borderRadius: '10px',
+        '&:hover': {
+            border: '2px solid white',
+            borderRadius: '10px',
+        },
+    },
     footer: {
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
@@ -97,26 +113,30 @@ export default function CardComponent(props) {
                 <CardActions className={classes.cardButtons}>
                     {jwtToken ? (
                         <>
-                            <Button
-                                variant='outlined'
-                                size='small'
-                                color='primary'
-                                onClick={() => {
-                                    window.open(linkString);
-                                }}
-                            >
-                                Link to Recipe
-                            </Button>
-                            <Button
-                                variant='outlined'
-                                size='small'
-                                color='primary'
-                                onClick={() =>
-                                    handleOnClick(label, image, recipeLink)
-                                }
-                            >
-                                Save to Favorites
-                            </Button>
+                            <div className={classes.link_btn}>
+                                <Button
+                                    variant='outlined'
+                                    size='small'
+                                    color='primary'
+                                    onClick={() => {
+                                        window.open(linkString);
+                                    }}
+                                >
+                                    Link to Recipe
+                                </Button>
+                            </div>
+                            <div className={classes.save_btn}>
+                                <Button
+                                    variant='outlined'
+                                    size='small'
+                                    color='primary'
+                                    onClick={() =>
+                                        handleOnClick(label, image, recipeLink)
+                                    }
+                                >
+                                    Save to Favorites
+                                </Button>
+                            </div>
                         </>
                     ) : (
                         <>
