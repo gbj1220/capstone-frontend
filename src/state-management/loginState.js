@@ -29,7 +29,8 @@ export const logInActionCreator =
 
             //setting jwtToken into localStorage so that I can grab it and put it into redux state
             localStorage.setItem('jwtToken', response.data.jwtToken);
-            await dispatch({
+
+            dispatch({
                 type: LOG_IN,
                 payload: {
                     jwtToken: response.data.jwtToken,

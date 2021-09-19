@@ -51,14 +51,14 @@ const useStyles = makeStyles(() => ({
 export default function ButtonAppBar() {
     const classes = useStyles();
 
-    const token = useSelector((state) => state.login.jwtToken);
+    const usrToken = useSelector((state) => state.login.jwtToken);
 
     const dispatch = useDispatch();
 
     const history = useHistory();
 
     const checkIfAuth = () => {
-        return token ? (
+        return usrToken ? (
             <div className={classes.root}>
                 <ThemeProvider theme={theme}>
                     <AppBar position='static'>

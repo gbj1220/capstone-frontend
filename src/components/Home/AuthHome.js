@@ -1,8 +1,10 @@
-import React, { useState, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import { callRecipeApiActionCreator } from '../../state-management/searchState';
-import { useDispatch } from 'react-redux';
-import { Button, TextField, ThemeProvider } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 import { createTheme, makeStyles } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import { Button, TextField, ThemeProvider } from '@material-ui/core';
+
 import IndividualCards from '../../components/IndividualCards/IndividualCards';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,14 +22,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AuthHome() {
     const classes = useStyles();
+
     const dispatch = useDispatch();
+
+    const history = useHistory();
+
+    const usrToken = useSelector((state) => state.login.jwtToken);
+
     const [usrInput, setUsrInput] = useState('');
+
     const theme = createTheme({
         palette: {
             primary: {
                 main: '#595959',
             },
         },
+    });
+
+    useEffect(() => {
+        !usrToken && history.push('/login');
     });
 
     return (

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router';
 import {
     Box,
     Button,
@@ -54,15 +55,24 @@ const useStyles = makeStyles((theme) => ({
 export default function FavoriteRecipes() {
     const classes = useStyles();
 
+    const history = useHistory();
+
     const recipesArr = useSelector(
         (state) => state.favoriteRecipes.mainData.favoriteRecipes
     );
+
+    const usrToken = useSelector((state) => state.login.jwtToken);
+    console.log(usrToken);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getRecipesActionCreator());
     }, []);
+
+    useEffect(() => {
+        !usrToken && history.push('/login');
+    });
 
     return (
         <div style={{ textAlign: 'center' }}>
