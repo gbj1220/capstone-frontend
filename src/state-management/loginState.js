@@ -19,7 +19,7 @@ export const initialState = {
 };
 
 export const logInActionCreator =
-    (username, password) => async (dispatch, getState) => {
+    (username, password) => async (dispatch) => {
         //calling my backend to do checks and stuff on login info and log them in or not
         try {
             let response = await Axios.post('/users/login', {
@@ -40,7 +40,7 @@ export const logInActionCreator =
                         id: uuidv4(),
                     },
                 },
-            });
+            })
         } catch (err) {
             console.log(err);
         }
