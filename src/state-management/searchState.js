@@ -17,7 +17,6 @@ export const initialState = {
 
 export const callRecipeApiActionCreator = (usrInput) => async (dispatch) => {
     try {
-        console.log(`hello there sir ${usrInput}!`);
         let response = await Axios.post('/users/get-recipe-data', {
             usrInput,
         });
