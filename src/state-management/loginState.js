@@ -10,7 +10,7 @@ const token = localStorage.getItem('jwtToken');
 
 export const initialState = {
     user: null,
-    jwtToken: token,
+    jwtToken: token || null,
     error: {
         msg: '',
     },
@@ -18,7 +18,7 @@ export const initialState = {
 
 export const logInActionCreator =
     (username, password) => async (dispatch) => {
-        //calling my backend to do checks and stuff on login info and log them in or not
+        // calling my backend to do checks and stuff on login info and log them in or not
         try {
             let response = await Axios.post('/users/login', {
                 username,
