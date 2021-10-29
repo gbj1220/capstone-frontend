@@ -1,5 +1,4 @@
 import Axios from '../components/Axios/Axios';
-import { v4 as uuidv4 } from 'uuid';
 
 export const LOG_IN = 'codeImmersives/sign-in';
 export const LOG_OUT = 'codeImmersives/logout';
@@ -14,7 +13,6 @@ export const initialState = {
     jwtToken: token,
     error: {
         msg: '',
-        id: null,
     },
 };
 
@@ -26,18 +24,17 @@ export const logInActionCreator =
                 username,
                 password,
             });
-
+            
+            console.log(`====== response: ${response.data} ======`)
             //setting jwtToken into localStorage so that I can grab it and put it into redux state
             localStorage.setItem('jwtToken', response.data.jwtToken);
-
             dispatch({
                 type: LOG_IN,
                 payload: {
                     jwtToken: response.data.jwtToken,
-                    user: username,
+                  user: username,
                     error: {
                         msg: response.data.err,
-                        id: uuidv4(),
                     },
                 },
             })
@@ -49,7 +46,7 @@ export const logInActionCreator =
 //creating a function to log the user out
 export const logoutActionCreator = (dispatch) => {
     try {
-        let removedToken = localStorage.removeItem('jwtToken');
+        const removedToken = localStorage.removeItem('jwtToken');
 
         dispatch({
             type: LOG_OUT,
@@ -72,7 +69,6 @@ export const reducer = (state = initialState, action) => {
                 jwtToken: action.payload.jwtToken,
                 error: {
                     msg: action.payload.error.msg,
-                    id: action.payload.error.id,
                 },
             };
         case LOG_OUT:
