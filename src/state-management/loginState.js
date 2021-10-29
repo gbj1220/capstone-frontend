@@ -26,7 +26,7 @@ export const logInActionCreator =
             });
             
             console.log(`====== response: ${response.data} ======`)
-            //setting jwtToken into localStorage so that I can grab it and put it into redux state
+            // setting jwtToken into localStorage so that I can grab it and put it into redux state
             localStorage.setItem('jwtToken', response.data.jwtToken);
             dispatch({
                 type: LOG_IN,

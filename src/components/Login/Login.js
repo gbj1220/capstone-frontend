@@ -57,10 +57,8 @@ export default function SignInSide() {
     const history = useHistory();
 
     //grabbing jwtToken from the redux login state
-    // const token = useSelector((state) => state.login.jwtToken);
+    const jwtToken = useSelector((state) => state.login.jwtToken);
     const errMsg = useSelector((state) => state.login.error.msg);
-    // grabbing the token from the localStorage instead of redux so that the page will change when users logs in in same request;
-    const jwtToken = localStorage.getItem("jwtToken")
 
     //setting states for username and password to grab the users input
     const [username, setUsername] = useState('');
