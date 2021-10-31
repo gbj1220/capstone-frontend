@@ -3,10 +3,10 @@ import Axios from '../components/Axios/Axios';
 export const SAVE_RECIPE = 'codeImmersives/saveRecipe';
 
 export const initialState = {
-	mainData: {
-		label: null,
-		image: null,
-		recipeLink: null,
+  mainData: {
+    label: null,
+	  image: null,
+    recipeLink: null,
 	},
 };
 
