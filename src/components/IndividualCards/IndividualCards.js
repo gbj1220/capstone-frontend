@@ -17,7 +17,7 @@ export default function IndividualCards() {
         flexWrap="wrap"
         justifyContent="center"
       >
-        {hits.map((hit, i) => <CardComponent hit={hit} index={i} />)}
+        {hits.map((hit, idx) => <CardComponent hit={hit} index={idx} />)}
       </Box>
     </div>
   );

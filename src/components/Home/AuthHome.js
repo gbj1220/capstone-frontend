@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   createTheme, makeStyles, Button, TextField, ThemeProvider,
 } from '@material-ui/core';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import { callRecipeApiActionCreator } from '../../state-management/searchState';
 
@@ -45,7 +45,7 @@ export default function AuthHome() {
 
   return (
     <div
-      style={{ textAlign: 'center' }}
+      style={{ textAlign: 'center', backgroundColor: '#99cccc' }}
       onSubmit={(e) => e.preventDefault()}
     >
       <ThemeProvider theme={theme}>
@@ -59,6 +59,7 @@ export default function AuthHome() {
             id="outlined-basic"
             label="Outlined"
             variant="outlined"
+            style={{ backgroundColor: '#ffffff', border: 'black solid 1px' }}
             onChange={(event) => setUsrInput(event.target.value)}
           />
           <br />

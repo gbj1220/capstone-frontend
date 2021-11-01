@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -27,29 +28,33 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'row',
   },
   card: {
-    margin: '25px',
+    margin: '20px',
     boxShadow: '0 2px 20px black',
     borderRadius: '10px',
-    width: '400px',
-    height: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: '#505050',
+    maxWidth: '300px',
+
   },
   cardMedia: {
-    paddingTop: '56%',
+    padding: '50%',
   },
-  cardContent: {
+  cardTitle: {
     flexGrow: 1,
+    color: '#78fff1',
   },
   cardButtons: {
     justifyContent: 'center',
     alignContent: 'center',
-    margin: '25px',
+    padding: '10px',
+    margin: '10px',
   },
   save_btn: {
-    border: '2px solid red',
     borderRadius: '10px',
     '&:hover': {
       border: '2px solid white',
@@ -57,16 +62,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   link_btn: {
-    border: '2px solid red',
     borderRadius: '10px',
     '&:hover': {
       border: '2px solid white',
       borderRadius: '10px',
     },
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+  itemPic: {
   },
 }));
 
@@ -99,65 +101,69 @@ export default function CardComponent(props) {
   }
 
   return (
-    <div key={index}>
-      <Card className={classes.card} style={{ margin: '20px' }}>
-        <CardMedia
-          className={classes.cardMedia}
-          image={image}
-          title="Image title"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h5">
-            {label}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.cardButtons}>
-          {jwtToken ? (
-            <>
-              <div className={classes.link_btn}>
+    <>
+      <Box key={index} className={classes.cardGrid}>
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.cardMedia}
+            image={image}
+            title="Image title"
+          />
+
+          <CardContent className={classes.cardTitle}>
+            <Typography gutterBottom variant="h5" component="h5">
+              {label}
+            </Typography>
+          </CardContent>
+          <CardActions className={classes.cardButtons}>
+            {jwtToken ? (
+              <>
+                <Box className={classes.link_btn}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    color="primary"
+                    onClick={() => {
+                      window.open(linkString);
+                    }}
+                  >
+                    Link to Recipe
+                  </Button>
+                </Box>
+                <div className={classes.save_btn}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    color="primary"
+                    onClick={() => handleOnClick(label, image, recipeLink)}
+                  >
+                    Save to Favorites
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
                 <Button
-                  variant="outlined"
                   size="small"
                   color="primary"
-                  onClick={() => {
-                    window.open(linkString);
-                  }}
+                  onClick={() => history.push('/error')}
                 >
-                  Link to Recipe
+                  View Recipe
                 </Button>
-              </div>
-              <div className={classes.save_btn}>
                 <Button
-                  variant="outlined"
                   size="small"
                   color="primary"
-                  onClick={() => handleOnClick(label, image, recipeLink)}
+                  onClick={() => history.push('/error2')}
                 >
                   Save to Favorites
                 </Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => history.push('/error')}
-              >
-                View Recipe
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => history.push('/error2')}
-              >
-                Save to Favorites
-              </Button>
-            </>
-          )}
-        </CardActions>
-      </Card>
-    </div>
+              </>
+            )}
+          </CardActions>
+        </Card>
+
+      </Box>
+    </>
   );
 }
 

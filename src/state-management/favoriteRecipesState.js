@@ -17,10 +17,10 @@ export const initialState = {
 
 export const getRecipesActionCreator = () => async (dispatch, getState) => {
   try {
-    let currentState = getState();
-    let jwtToken = currentState.login.jwtToken;
+    const currentState = getState();
+    const { jwtToken } = currentState.login;
 
-    let response = await Axios.get('/users/get-recipes', {
+    const response = await Axios.get('/users/get-recipes', {
       headers: { authorization: `Bearer ${jwtToken}` },
     });
 
@@ -37,14 +37,14 @@ export const getRecipesActionCreator = () => async (dispatch, getState) => {
 
 export const removeRecipeActionCreator = () => async (dispatch, getState) => {
   try {
-    let currentState = getState();
-    let jwtToken = currentState.login.jwtToken;
+    const currentState = getState();
+    const { jwtToken } = currentState.login;
 
-    let response = await Axios.delete('/users/remove-recipe', {
+    const response = await Axios.delete('/users/remove-recipe', {
       headers: { authorization: `Bearer ${jwtToken}` },
     });
 
-    console.log(`====== response ======`);
+    console.log('====== response ======');
     console.log(response);
 
     dispatch({

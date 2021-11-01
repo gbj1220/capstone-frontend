@@ -1,50 +1,53 @@
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import {
-    reducer as signUpReducer,
-    initialState as signUpState,
+  createStore, compose, applyMiddleware, combineReducers,
+} from 'redux';
+import thunk from 'redux-thunk';
+import {
+  reducer as signUpReducer,
+  initialState as signUpState,
 } from '../state-management/signUpState';
 import {
-    reducer as loginReducer,
-    initialState as loginState,
+  reducer as loginReducer,
+  initialState as loginState,
 } from '../state-management/loginState';
 
 import {
-    reducer as nonUserSearchReducer,
-    initialState as nonUserSearchState,
+  reducer as nonUserSearchReducer,
+  initialState as nonUserSearchState,
 } from '../state-management/searchState';
 
 import {
-    reducer as saveRecipeReducer,
-    initialState as saveRecipeState,
+  reducer as saveRecipeReducer,
+  initialState as saveRecipeState,
 } from '../state-management/recipeState';
 
 import {
-    reducer as favoriteRecipesReducer,
-    initialState as favoriteRecipeState,
+  reducer as favoriteRecipesReducer,
+  initialState as favoriteRecipeState,
 } from '../state-management/favoriteRecipesState';
-
-import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
-    signUp: signUpState,
-    login: loginState,
-    nonUserSearch: nonUserSearchState,
-    savedRecipes: saveRecipeState,
-    favoriteRecipes: favoriteRecipeState,
+  signUp: signUpState,
+  login: loginState,
+  nonUserSearch: nonUserSearchState,
+  savedRecipes: saveRecipeState,
+  favoriteRecipes: favoriteRecipeState,
 };
 
 const rootReducer = combineReducers({
-    signUp: signUpReducer,
-    login: loginReducer,
-    nonUserSearch: nonUserSearchReducer,
-    mostRecentlyAddedRecipe: saveRecipeReducer,
-    favoriteRecipes: favoriteRecipesReducer,
+  signUp: signUpReducer,
+  login: loginReducer,
+  nonUserSearch: nonUserSearchReducer,
+  mostRecentlyAddedRecipe: saveRecipeReducer,
+  favoriteRecipes: favoriteRecipesReducer,
 });
 
-export const reduxStore = createStore(
-    rootReducer,
-    initialState,
-    composeEnhancers(applyMiddleware(thunk))
+const reduxStore = createStore(
+  rootReducer,
+  initialState,
+  composeEnhancers(applyMiddleware(thunk)),
 );
+
+export default reduxStore;
