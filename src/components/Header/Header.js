@@ -1,5 +1,5 @@
 import {
-  AppBar, Button, Toolbar,
+  AppBar, Box, Button, Toolbar,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTheme, makeStyles } from '@material-ui/core/styles';
@@ -47,6 +47,9 @@ const useStyles = makeStyles(() => ({
     color: '#78FFF1',
     border: '2px solid #78FFF1',
   },
+  appBar: {
+    position: 'fixed',
+  },
 }));
 
 export default function ButtonAppBar() {
@@ -59,9 +62,9 @@ export default function ButtonAppBar() {
   const history = useHistory();
 
   const checkIfAuth = () => (usrToken ? (
-    <div className={classes.root}>
+    <Box flexGrow={1}>
       <ThemeProvider theme={theme}>
-        <AppBar position="fixed">
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <Button
               className={classes.title}
@@ -86,13 +89,14 @@ export default function ButtonAppBar() {
               </Button>
             </div>
           </Toolbar>
+
         </AppBar>
       </ThemeProvider>
-    </div>
+    </Box>
   ) : (
-    <div className={classes.root}>
+    <Box>
       <ThemeProvider theme={theme}>
-        <AppBar position="static">
+        <AppBar>
           <Toolbar className={classes.toolbar}>
             <Button
               className={classes.title}
@@ -117,7 +121,7 @@ export default function ButtonAppBar() {
           </Toolbar>
         </AppBar>
       </ThemeProvider>
-    </div>
+    </Box>
   ));
   return checkIfAuth();
 }

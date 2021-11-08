@@ -59,7 +59,7 @@ export default function AuthHome() {
             id="outlined-basic"
             label="Outlined"
             variant="outlined"
-            style={{ backgroundColor: '#ffffff', border: 'black solid 1px' }}
+            style={{ backgroundColor: '#ffffff', border: 'black solid 1px', marginTop: '75px' }}
             onChange={(event) => setUsrInput(event.target.value)}
           />
           <br />
