@@ -5,8 +5,6 @@ export const CALL_RECIPE_API = 'codeImmersives/callRecipeApi';
 
 const currentSearch = localStorage.getItem('currentSearch');
 const prevHit = JSON.parse(currentSearch);
-console.log('====== parsedData ======');
-console.log(prevHit);
 
 // creating an initialState for searchState to utilize
 export const initialState = {

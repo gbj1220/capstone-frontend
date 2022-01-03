@@ -1,42 +1,39 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Box } from '@material-ui/core';
-import {
-  getRecipesActionCreator,
-} from '../../state-management/favoriteRecipesState';
-import DisplayFavoriteRecipes from './DisplayFavoriteRecipes';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Box } from "@material-ui/core";
+import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
+import DisplayFavoriteRecipes from "./DisplayFavoriteRecipes";
 
-export default function FavoriteRecipes() {
+const FavoriteRecipes = () => {
   const history = useHistory();
 
-  const recipesArr = useSelector(
-    (state) => state.favoriteRecipes.mainData.favoriteRecipes,
-  );
+  // getting called before the array is actually populated
+  const recipesArr = useSelector((state) => state.favoriteRecipes.recipesArr);
 
   const usrToken = useSelector((state) => state.login.jwtToken);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRecipesActionCreator());
+    !usrToken ? history.push("login") : dispatch(getRecipesActionCreator());
   }, []);
-
-  useEffect(() => !usrToken && history.push('/login'));
 
   return (
     <div>
       <Box
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
-        justifyContent="center"
-        bgcolor="#78fff1"
+        display='flex'
+        flexDirection='row'
+        flexWrap='wrap'
+        justifyContent='center'
+        bgcolor='#78fff1'
       >
-        {recipesArr.map((recipe) => (
-          <DisplayFavoriteRecipes recipe={recipe} />
+        {recipesArr.map((recipe, idx) => (
+          <DisplayFavoriteRecipes recipe={recipe} key={idx} />
         ))}
       </Box>
     </div>
   );
-}
+};
+
+export default FavoriteRecipes;

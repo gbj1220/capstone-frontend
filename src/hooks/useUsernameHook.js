@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { matches } from 'validator';
+import { useState } from "react";
+import { matches } from "validator";
 
-function useUsernameHook() {
-  const [username, setUsername] = useState('');
+const useUsernameHook = () => {
+  const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState(false);
-  const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
 
   const handleUsernameOnSubmit = (e) => {
     setUsername(e.target.value);
@@ -12,12 +12,10 @@ function useUsernameHook() {
     const checkForSymbol = (target) => {
       if (matches(target, /[!@#$%^&*()[\],.?":;{}|<>]/g)) {
         setUsernameError(true);
-        setUsernameErrorMessage(
-          'Username can not contain special characters',
-        );
+        setUsernameErrorMessage("Username can not contain special characters");
       } else {
         setUsernameError(false);
-        setUsernameErrorMessage('');
+        setUsernameErrorMessage("");
       }
     };
     return checkForSymbol(username);
@@ -28,6 +26,6 @@ function useUsernameHook() {
     usernameError,
     usernameErrorMessage,
   };
-}
+};
 
 export default useUsernameHook;

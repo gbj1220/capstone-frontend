@@ -1,58 +1,37 @@
-import Axios from '../components/Axios/Axios';
+import Axios from "../components/Axios/Axios";
 
-export const GET_RECIPES = 'codeImmersives/getRecipe';
-export const REMOVE_FAVORITE = 'codeImmersives/removeFavorite';
+export const GET_RECIPES = "codeImmersives/getRecipe";
+export const REMOVE_FAVORITE = "codeImmersives/removeFavorite";
 
 export const initialState = {
-  mainData: {
-    favoriteRecipes: [
-      {
-        label: null,
-        recipeLink: null,
-        image: null,
-      },
-    ],
-  },
+  recipesArr: [],
 };
 
 export const getRecipesActionCreator = () => async (dispatch, getState) => {
   try {
     const currentState = getState();
-    const { jwtToken } = currentState.login;
+    const token = currentState.login.jwtToken;
 
-    const response = await Axios.get('/users/get-recipes', {
-      headers: { authorization: `Bearer ${jwtToken}` },
+    const response = await Axios.get("/users/get-recipes", {
+      headers: { authorization: `Bearer ${token}` },
     });
 
+    const recipesArr = response.data.payload;
+    const responseLabel = recipesArr.map((el) => el.label);
+    const responseImage = recipesArr.map((el) => el.image);
+    const responseRecipeLink = recipesArr.map((el) => el.recipeLink);
+
+    console.log(responseLabel);
+    console.log(responseImage);
+    console.log(responseRecipeLink);
     dispatch({
       type: GET_RECIPES,
       payload: {
-        response: response.data.recipes,
+        label: responseLabel,
+        image: responseImage,
+        imageUrl: responseRecipeLink,
       },
     });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const removeRecipeActionCreator = () => async (dispatch, getState) => {
-  try {
-    const currentState = getState();
-    const { jwtToken } = currentState.login;
-
-    const response = await Axios.delete('/users/remove-recipe', {
-      headers: { authorization: `Bearer ${jwtToken}` },
-    });
-
-    console.log('====== response ======');
-    console.log(response);
-
-    dispatch({
-      type: REMOVE_FAVORITE,
-      payload: {},
-    });
-
-    // const response = await Axios.post('/users/remove-recipe', {});
   } catch (err) {
     console.log(err);
   }
@@ -63,8 +42,10 @@ export const reducer = (state = initialState, action) => {
     case GET_RECIPES:
       return {
         ...state,
-        mainData: {
-          favoriteRecipes: action.payload.response,
+        recipesArr: {
+          label: action.payload.label,
+          image: action.payload.image,
+          imageUrl: action.payload.imageUrl,
         },
       };
 

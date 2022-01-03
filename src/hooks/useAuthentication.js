@@ -1,16 +1,16 @@
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 const useAuthenticationHooks = () => {
-  function getLocalStorageJWT() {
-    return localStorage.getItem('jwtToken');
-  }
-  function setLocalStorageJWT(jwtToken) {
-    return localStorage.setItem('jwtToken', jwtToken);
-  }
-  function removeToken() {
-    localStorage.removeItem('usersToken');
-  }
-  function checkToken() {
+  const getLocalStorageJWT = () => {
+    return localStorage.getItem("jwtToken");
+  };
+  const setLocalStorageJWT = (jwtToken) => {
+    return localStorage.setItem("jwtToken", jwtToken);
+  };
+  const removeToken = () => {
+    localStorage.removeItem("usersToken");
+  };
+  const checkToken = () => {
     const token = getLocalStorageJWT();
 
     if (token) {
@@ -24,7 +24,8 @@ const useAuthenticationHooks = () => {
       return true;
     }
     return false;
-  }
+  };
   return [checkToken, removeToken];
 };
+
 export default useAuthenticationHooks;

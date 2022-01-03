@@ -4,9 +4,9 @@ export const LOG_IN = 'codeImmersives/sign-in';
 export const LOG_OUT = 'codeImmersives/logout';
 export const LOG_IN_ERROR = 'codeImmersives/logInError';
 
-// declaring the initial state
-
 const token = localStorage.getItem('jwtToken');
+
+// declaring the initial state
 
 export const initialState = {
   user: null,
@@ -17,14 +17,13 @@ export const initialState = {
 };
 
 export const logInActionCreator = (username, password) => async (dispatch) => {
-  // calling my backend to do checks and stuff on login info and log them in or not
+  // calling my backend to do checks on login info and log them in or not
   try {
     const response = await Axios.post('/users/login', {
       username,
       password,
     });
 
-    console.log(`====== response: ${response.data} ======`);
     // setting jwtToken into localStorage so that I can grab it and put it into redux state
     localStorage.setItem('jwtToken', response.data.jwtToken);
     dispatch({

@@ -1,37 +1,35 @@
-import {
-  createStore, compose, applyMiddleware, combineReducers,
-} from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
 import {
   reducer as signUpReducer,
   initialState as signUpState,
-} from '../state-management/signUpState';
+} from "../state-management/signUpState";
 import {
   reducer as loginReducer,
   initialState as loginState,
-} from '../state-management/loginState';
+} from "../state-management/loginState";
 
 import {
-  reducer as nonUserSearchReducer,
-  initialState as nonUserSearchState,
-} from '../state-management/searchState';
+  reducer as userSearchReducer,
+  initialState as userSearchState,
+} from "../state-management/searchState";
 
 import {
   reducer as saveRecipeReducer,
   initialState as saveRecipeState,
-} from '../state-management/recipeState';
+} from "../state-management/recipeState";
 
 import {
   reducer as favoriteRecipesReducer,
   initialState as favoriteRecipeState,
-} from '../state-management/favoriteRecipesState';
+} from "../state-management/favoriteRecipesState";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
   signUp: signUpState,
   login: loginState,
-  nonUserSearch: nonUserSearchState,
+  userSearch: userSearchState,
   savedRecipes: saveRecipeState,
   favoriteRecipes: favoriteRecipeState,
 };
@@ -39,15 +37,15 @@ const initialState = {
 const rootReducer = combineReducers({
   signUp: signUpReducer,
   login: loginReducer,
-  nonUserSearch: nonUserSearchReducer,
-  mostRecentlyAddedRecipe: saveRecipeReducer,
+  userSearch: userSearchReducer,
+  mostRecentlySavedRecipe: saveRecipeReducer,
   favoriteRecipes: favoriteRecipesReducer,
 });
 
 const reduxStore = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(applyMiddleware(thunk)),
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 export default reduxStore;

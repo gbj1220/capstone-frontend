@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  createTheme, makeStyles, Button, TextField, ThemeProvider,
-} from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+  createTheme,
+  makeStyles,
+  Button,
+  TextField,
+  ThemeProvider,
+} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
-import { callRecipeApiActionCreator } from '../../state-management/searchState';
+import { callRecipeApiActionCreator } from "../../state-management/searchState";
 
-import IndividualCards from '../IndividualCards/IndividualCards';
+import IndividualCards from "../IndividualCards/IndividualCards";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
-      width: '50%',
-      maxWidth: '700px',
+      width: "50%",
+      maxWidth: "700px",
     },
   },
   submitBtn: {
-    width: '150px',
+    width: "150px",
   },
 }));
 
-export default function AuthHome() {
+const AuthHome = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -31,43 +35,48 @@ export default function AuthHome() {
 
   const usrToken = useSelector((state) => state.login.jwtToken);
 
-  const [usrInput, setUsrInput] = useState('');
+  const [usrInput, setUsrInput] = useState("");
 
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#595959',
+        main: "#595959",
       },
     },
   });
 
-  useEffect(() => !usrToken && history.push('/login'));
+  useEffect(() => !usrToken && history.push("/login"));
 
   return (
     <div
-      style={{ textAlign: 'center', backgroundColor: '#99cccc' }}
+      style={{ textAlign: "center", backgroundColor: "#99cccc" }}
       onSubmit={(e) => e.preventDefault()}
     >
       <ThemeProvider theme={theme}>
         <form
           className={classes.root}
           noValidate
-          autoComplete="off"
+          autoComplete='off'
           onSubmit={(event) => event.preventDefault()}
         >
           <TextField
-            id="outlined-basic"
-            label="Outlined"
-            variant="outlined"
-            style={{ backgroundColor: '#ffffff', border: 'black solid 1px', marginTop: '75px' }}
+            id='outlined-basic'
+            label='Outlined'
+            variant='outlined'
+            style={{
+              backgroundColor: "#ffffff",
+              border: "black solid 1px",
+              marginTop: "75px",
+            }}
             onChange={(event) => setUsrInput(event.target.value)}
           />
           <br />
 
           <Button
             className={classes.submitBtn}
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
+            type='submit'
             onClick={() => dispatch(callRecipeApiActionCreator(usrInput))}
           >
             Submit
@@ -79,4 +88,5 @@ export default function AuthHome() {
       </div>
     </div>
   );
-}
+};
+export default AuthHome;

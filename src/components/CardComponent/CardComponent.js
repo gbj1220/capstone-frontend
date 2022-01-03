@@ -1,7 +1,9 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { saveRecipeActionCreator } from "../../state-management/recipeState";
 import {
   Box,
   Button,
@@ -10,11 +12,7 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from '@material-ui/core';
-import { toast } from 'react-toastify';
-
-import './CardComponent.css';
-import { saveRecipeActionCreator } from '../../state-management/recipeState';
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -28,52 +26,50 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
   cardGrid: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
   },
   card: {
-    margin: '20px',
-    boxShadow: '0 2px 20px black',
-    borderRadius: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: '#505050',
-    maxWidth: '300px',
-
+    margin: "20px",
+    boxShadow: "0 2px 20px black",
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#505050",
+    maxWidth: "300px",
   },
   cardMedia: {
-    padding: '50%',
+    padding: "50%",
   },
   cardTitle: {
     flexGrow: 1,
-    color: '#78fff1',
+    color: "#78fff1",
   },
   cardButtons: {
-    justifyContent: 'center',
-    alignContent: 'center',
-    padding: '10px',
-    margin: '10px',
+    justifyContent: "center",
+    alignContent: "center",
+    padding: "10px",
+    margin: "10px",
   },
   save_btn: {
-    borderRadius: '10px',
-    '&:hover': {
-      border: '2px solid white',
-      borderRadius: '10px',
+    borderRadius: "10px",
+    "&:hover": {
+      border: "2px solid white",
+      borderRadius: "10px",
     },
   },
   link_btn: {
-    borderRadius: '10px',
-    '&:hover': {
-      border: '2px solid white',
-      borderRadius: '10px',
+    borderRadius: "10px",
+    "&:hover": {
+      border: "2px solid white",
+      borderRadius: "10px",
     },
   },
-  itemPic: {
-  },
+  itemPic: {},
 }));
 
-export default function CardComponent(props) {
-  const { hit, index } = props;
+const CardComponent = (props) => {
+  const { hit, key } = props;
   const classes = useStyles();
 
   const history = useHistory();
@@ -87,10 +83,10 @@ export default function CardComponent(props) {
   const recipeLink = hit.recipe.url;
   const linkString = String(recipeLink);
 
-  function handleOnClick() {
+  const handleOnClick = () => {
     dispatch(saveRecipeActionCreator(label, image, recipeLink));
-    toast('Added to favorite recipes!', {
-      position: 'top-right',
+    toast("Added to favorite recipes!", {
+      position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -98,20 +94,20 @@ export default function CardComponent(props) {
       draggable: true,
       progress: undefined,
     });
-  }
+  };
 
   return (
     <>
-      <Box key={index} className={classes.cardGrid}>
+      <Box key={key} className={classes.cardGrid}>
         <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
             image={image}
-            title="Image title"
+            title='Image title'
           />
 
           <CardContent className={classes.cardTitle}>
-            <Typography gutterBottom variant="h5" component="h5">
+            <Typography gutterBottom variant='h5' component='h5'>
               {label}
             </Typography>
           </CardContent>
@@ -120,9 +116,9 @@ export default function CardComponent(props) {
               <>
                 <Box className={classes.link_btn}>
                   <Button
-                    variant="outlined"
-                    size="small"
-                    color="primary"
+                    variant='outlined'
+                    size='small'
+                    color='primary'
                     onClick={() => {
                       window.open(linkString);
                     }}
@@ -132,9 +128,9 @@ export default function CardComponent(props) {
                 </Box>
                 <div className={classes.save_btn}>
                   <Button
-                    variant="outlined"
-                    size="small"
-                    color="primary"
+                    variant='outlined'
+                    size='small'
+                    color='primary'
                     onClick={() => handleOnClick(label, image, recipeLink)}
                   >
                     Save to Favorites
@@ -144,16 +140,16 @@ export default function CardComponent(props) {
             ) : (
               <>
                 <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => history.push('/error')}
+                  size='small'
+                  color='primary'
+                  onClick={() => history.push("/error")}
                 >
                   View Recipe
                 </Button>
                 <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => history.push('/error2')}
+                  size='small'
+                  color='primary'
+                  onClick={() => history.push("/error2")}
                 >
                   Save to Favorites
                 </Button>
@@ -161,13 +157,14 @@ export default function CardComponent(props) {
             )}
           </CardActions>
         </Card>
-
       </Box>
     </>
   );
-}
+};
 
 CardComponent.propTypes = {
   label: String.isRequired,
   image: String.isRequired,
 }.isRequired;
+
+export default CardComponent;

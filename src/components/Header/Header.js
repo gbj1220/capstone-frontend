@@ -1,18 +1,17 @@
-import {
-  AppBar, Box, Button, Toolbar,
-} from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { createTheme, makeStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { useHistory } from 'react-router-dom';
-import React from 'react';
-import { logoutActionCreator } from '../../state-management/loginState';
-import { getRecipesActionCreator } from '../../state-management/favoriteRecipesState';
+import { AppBar, Box, Button, Toolbar } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { createTheme, makeStyles } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import { useHistory } from "react-router-dom";
+import React from "react";
+import { logoutActionCreator } from "../../state-management/loginState";
+import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
+import { checkPropTypes } from "prop-types";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#505050',
+      main: "#505050",
     },
   },
 });
@@ -22,37 +21,37 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   title: {
-    color: '#78FFF1',
-    border: '2px solid #78FFF1',
+    color: "#78FFF1",
+    border: "2px solid #78FFF1",
   },
   toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
+    display: "flex",
+    justifyContent: "space-between",
   },
   goToSignUpBtn: {
-    color: '#78FFF1',
-    border: '2px solid #78FFF1',
-    marginRight: '5px',
+    color: "#78FFF1",
+    border: "2px solid #78FFF1",
+    marginRight: "5px",
   },
   favorites_btn: {
-    color: '#78FFF1',
-    border: '2px solid #78FFF1',
-    marginRight: '5px',
+    color: "#78FFF1",
+    border: "2px solid #78FFF1",
+    marginRight: "5px",
   },
   logout_btn: {
-    color: '#78FFF1',
-    border: '2px solid #78FFF1',
+    color: "#78FFF1",
+    border: "2px solid #78FFF1",
   },
   logInBtn: {
-    color: '#78FFF1',
-    border: '2px solid #78FFF1',
+    color: "#78FFF1",
+    border: "2px solid #78FFF1",
   },
   appBar: {
-    position: 'fixed',
+    position: "fixed",
   },
 }));
 
-export default function ButtonAppBar() {
+const ButtonAppBar = () => {
   const classes = useStyles();
 
   const usrToken = useSelector((state) => state.login.jwtToken);
@@ -61,67 +60,72 @@ export default function ButtonAppBar() {
 
   const history = useHistory();
 
-  const checkIfAuth = () => (usrToken ? (
-    <Box flexGrow={1}>
-      <ThemeProvider theme={theme}>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar className={classes.toolbar}>
-            <Button
-              className={classes.title}
-              onClick={() => history.push('/home')}
-            >
-              Recipe Finder
-            </Button>
-            <div className={classes.twoButtons}>
+  const checkIfAuth = () =>
+    usrToken ? (
+      <Box flexGrow={1}>
+        <ThemeProvider theme={theme}>
+          <AppBar position='fixed' className={classes.appBar}>
+            <Toolbar className={classes.toolbar}>
               <Button
-                className={classes.favorites_btn}
-                onClick={() => dispatch(getRecipesActionCreator())
-                  && history.push('/favorites')}
+                className={classes.title}
+                onClick={() => history.push("/home")}
               >
-                Favorites
+                Recipe Finder
               </Button>
+              <div className={classes.twoButtons}>
+                <Button
+                  className={classes.favorites_btn}
+                  onClick={() =>
+                    dispatch(getRecipesActionCreator()) &&
+                    history.push("/favorites")
+                  }
+                >
+                  Favorites
+                </Button>
+                <Button
+                  className={classes.logout_btn}
+                  onClick={() =>
+                    dispatch(logoutActionCreator) && history.push("/")
+                  }
+                >
+                  Logout
+                </Button>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </ThemeProvider>
+      </Box>
+    ) : (
+      <Box>
+        <ThemeProvider theme={theme}>
+          <AppBar>
+            <Toolbar className={classes.toolbar}>
               <Button
-                className={classes.logout_btn}
-                onClick={() => dispatch(logoutActionCreator)
-                  && history.push('/')}
+                className={classes.title}
+                onClick={() => history.push("/guest-search")}
               >
-                Logout
+                Recipe Finder
               </Button>
-            </div>
-          </Toolbar>
-
-        </AppBar>
-      </ThemeProvider>
-    </Box>
-  ) : (
-    <Box>
-      <ThemeProvider theme={theme}>
-        <AppBar>
-          <Toolbar className={classes.toolbar}>
-            <Button
-              className={classes.title}
-              onClick={() => history.push('/guest-search')}
-            >
-              Recipe Finder
-            </Button>
-            <div>
-              <Button
-                className={classes.goToSignUpBtn}
-                onClick={() => history.push('/sign-up')}
-              >
-                Sign Up
-              </Button>
-              <Button
-                className={classes.logInBtn}
-                onClick={() => history.push('/login')}
-              >
-                Login
-              </Button>
-            </div>
-          </Toolbar>
-        </AppBar>
-      </ThemeProvider>
-    </Box>
-  ));
+              <div>
+                <Button
+                  className={classes.goToSignUpBtn}
+                  onClick={() => history.push("/sign-up")}
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  className={classes.logInBtn}
+                  onClick={() => history.push("/login")}
+                >
+                  Login
+                </Button>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </ThemeProvider>
+      </Box>
+    );
   return checkIfAuth();
-}
+};
+
+export default ButtonAppBar;

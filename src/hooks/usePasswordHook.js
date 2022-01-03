@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { isStrongPassword } from 'validator';
+import { useState } from "react";
+import { isStrongPassword } from "validator";
 
-function usePasswordHook() {
-  const [password, setPassword] = useState('');
+const usePasswordHook = () => {
+  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
   const handlePasswordOnChange = (e) => {
     setPassword(e.target.value);
@@ -12,11 +12,11 @@ function usePasswordHook() {
     if (!isStrongPassword(e.target.value)) {
       setPasswordError(true);
       setPasswordErrorMessage(
-        'Password must include at least 8 characters, 1 lowercase letter, 1 uppercase letter, and 1 symbol',
+        "Password must include at least 8 characters, 1 lowercase letter, 1 uppercase letter, and 1 symbol"
       );
     } else {
       setPasswordError(false);
-      setPasswordErrorMessage('');
+      setPasswordErrorMessage("");
     }
   };
 
@@ -26,6 +26,6 @@ function usePasswordHook() {
     passwordError,
     passwordErrorMessage,
   };
-}
+};
 
 export default usePasswordHook;

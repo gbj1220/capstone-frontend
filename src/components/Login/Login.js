@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   CssBaseline,
@@ -7,48 +7,48 @@ import {
   Paper,
   TextField,
   Typography,
-} from '@material-ui/core/';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { logInActionCreator } from '../../state-management/loginState';
+} from "@material-ui/core/";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { logInActionCreator } from "../../state-management/loginState";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundRepeat: "no-repeat",
     backgroundColor:
-      theme.palette.type === 'light'
+      theme.palette.type === "light"
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   errMsg: {
-    color: 'red',
+    color: "red",
   },
 }));
 
-export default function SignInSide() {
+const Login = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -61,34 +61,26 @@ export default function SignInSide() {
   const errMsg = useSelector((state) => state.login.error.msg);
 
   // setting states for username and password to grab the users input
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   // make a function to check users username against their password
 
   useEffect(() => {
     if (jwtToken) {
-      history.push('/home');
+      history.push("/home");
     } else {
-      history.push('/login');
+      history.push("/login");
     }
   }, [jwtToken]);
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component='main' className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid
-        item
-        xs={12}
-        sm={8}
-        md={5}
-        component={Paper}
-        elevation={6}
-        square
-      >
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
 
@@ -102,38 +94,38 @@ export default function SignInSide() {
             onSubmit={(e) => e.preventDefault()}
           >
             <TextField
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id='username'
+              label='Username'
+              name='username'
+              autoComplete='username'
               autoFocus
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
 
             <TextField
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              autoComplete='current-password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
 
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               className={classes.submit}
               onClick={() => dispatch(logInActionCreator(username, password))}
             >
@@ -146,4 +138,6 @@ export default function SignInSide() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default Login;
