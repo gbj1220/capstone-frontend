@@ -20,7 +20,6 @@ const App = () => {
   return (
     <>
       <Provider store={reduxStore}>
-        {Test}
         <Suspense fallback={<Spinner />}>
           <div className='MainRouter'>
             <ThemeProvider theme={theme}>
