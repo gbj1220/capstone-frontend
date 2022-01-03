@@ -1,13 +1,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
 
 const FavoriteRecipes = React.lazy(() =>
   import("../components/FavoriteRecipes/FavoriteRecipes")
 );
-
 const NotAuthHome = React.lazy(() => import("../components/Home/NotAuthHome"));
 const ErrorPage = React.lazy(() => import("../components/ErrorPage/ErrorPage"));
 const AuthHome = React.lazy(() => import("../components/Home/AuthHome"));
