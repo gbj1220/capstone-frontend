@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
 import DisplayFavoriteRecipes from "./DisplayFavoriteRecipes";
 
 const FavoriteRecipes = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // getting called before the array is actually populated
   const recipesArr = useSelector((state) => state.favoriteRecipes.recipesArr);
@@ -16,7 +16,7 @@ const FavoriteRecipes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    !usrToken ? history.push("login") : dispatch(getRecipesActionCreator());
+    !usrToken ? navigate("login") : dispatch(getRecipesActionCreator());
   }, []);
 
   return (

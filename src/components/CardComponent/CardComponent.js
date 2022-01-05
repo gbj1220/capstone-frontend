@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { saveRecipeActionCreator } from "../../state-management/recipeState";
@@ -72,7 +72,7 @@ const CardComponent = (props) => {
   const { hit, key } = props;
   const classes = useStyles();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -142,14 +142,14 @@ const CardComponent = (props) => {
                 <Button
                   size='small'
                   color='primary'
-                  onClick={() => history.push("/error")}
+                  onClick={() => navigate("/error")}
                 >
                   View Recipe
                 </Button>
                 <Button
                   size='small'
                   color='primary'
-                  onClick={() => history.push("/error2")}
+                  onClick={() => navigate("/error2")}
                 >
                   Save to Favorites
                 </Button>

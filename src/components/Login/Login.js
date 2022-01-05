@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core/";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logInActionCreator } from "../../state-management/loginState";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,8 +53,8 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  // setting a variable to use the useHistory hook
-  const history = useHistory();
+  // setting a variable to use the useNavigate hook
+  const navigate = useNavigate();
 
   // grabbing jwtToken from the redux login state
   const jwtToken = useSelector((state) => state.login.jwtToken);
@@ -68,9 +68,9 @@ const Login = () => {
 
   useEffect(() => {
     if (jwtToken) {
-      history.push("/home");
+      navigate("/home");
     } else {
-      history.push("/login");
+      navigate("/login");
     }
   }, [jwtToken]);
 

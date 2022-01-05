@@ -2,7 +2,7 @@ import { AppBar, Box, Button, Toolbar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { logoutActionCreator } from "../../state-management/loginState";
 import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
@@ -58,7 +58,7 @@ const ButtonAppBar = () => {
 
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const checkIfAuth = () =>
     usrToken ? (
@@ -68,7 +68,7 @@ const ButtonAppBar = () => {
             <Toolbar className={classes.toolbar}>
               <Button
                 className={classes.title}
-                onClick={() => history.push("/home")}
+                onClick={() => navigate("/home")}
               >
                 Recipe Finder
               </Button>
@@ -77,16 +77,14 @@ const ButtonAppBar = () => {
                   className={classes.favorites_btn}
                   onClick={() =>
                     dispatch(getRecipesActionCreator()) &&
-                    history.push("/favorites")
+                    navigate("/favorites")
                   }
                 >
                   Favorites
                 </Button>
                 <Button
                   className={classes.logout_btn}
-                  onClick={() =>
-                    dispatch(logoutActionCreator) && history.push("/")
-                  }
+                  onClick={() => dispatch(logoutActionCreator) && navigate("/")}
                 >
                   Logout
                 </Button>
@@ -102,20 +100,20 @@ const ButtonAppBar = () => {
             <Toolbar className={classes.toolbar}>
               <Button
                 className={classes.title}
-                onClick={() => history.push("/guest-search")}
+                onClick={() => navigate("/guest-search")}
               >
                 Recipe Finder
               </Button>
               <div>
                 <Button
                   className={classes.goToSignUpBtn}
-                  onClick={() => history.push("/sign-up")}
+                  onClick={() => navigate("/sign-up")}
                 >
                   Sign Up
                 </Button>
                 <Button
                   className={classes.logInBtn}
-                  onClick={() => history.push("/login")}
+                  onClick={() => navigate("/login")}
                 >
                   Login
                 </Button>

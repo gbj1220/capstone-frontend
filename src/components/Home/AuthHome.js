@@ -7,7 +7,7 @@ import {
   TextField,
   ThemeProvider,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { callRecipeApiActionCreator } from "../../state-management/searchState";
 
@@ -31,7 +31,7 @@ const AuthHome = () => {
 
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const usrToken = useSelector((state) => state.login.jwtToken);
 
@@ -45,7 +45,7 @@ const AuthHome = () => {
     },
   });
 
-  useEffect(() => !usrToken && history.push("/login"));
+  useEffect(() => !usrToken && navigate("/login"));
 
   return (
     <div
