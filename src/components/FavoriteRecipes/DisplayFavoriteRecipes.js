@@ -15,13 +15,15 @@ const DisplayFavoriteRecipes = (props) => {
     idx,
   } = props;
 
-  const linkToRecipe = String(recipeLink);
-
   return (
     <Box key={idx}>
       <Card style={{ margin: "20px" }}>
         <Box>
-          <CardMedia style={{ padding: "50%" }} image={image} />
+          <CardMedia
+            style={{ padding: "50%" }}
+            component={"img"}
+            image={image}
+          />
         </Box>
 
         <Box bgcolor='#505050'>
@@ -38,7 +40,7 @@ const DisplayFavoriteRecipes = (props) => {
                 }}
                 variant='outlined'
                 size='small'
-                onClick={() => window.open(linkToRecipe)}
+                onClick={() => window.open(String(recipeLink))}
               >
                 Go to Link
               </Button>
@@ -60,6 +62,4 @@ const DisplayFavoriteRecipes = (props) => {
 
 export default DisplayFavoriteRecipes;
 
-DisplayFavoriteRecipes.propTypes = {
-  recipe: shape([]).isRequired,
-}.isRequired;
+DisplayFavoriteRecipes.propTypes = {}.isRequired;

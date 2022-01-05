@@ -4,11 +4,18 @@ export const GET_RECIPES = "codeImmersives/getRecipe";
 export const REMOVE_FAVORITE = "codeImmersives/removeFavorite";
 
 export const initialState = {
-  recipesArr: [],
+  recipesArr: [
+    {
+      label: "",
+      image: "",
+      recipeLink: "",
+    },
+  ],
 };
 
 export const getRecipesActionCreator = () => async (dispatch, getState) => {
   try {
+    console.log(`====== getRecipesActionCreator ran ======`);
     const currentState = getState();
     const token = currentState.login.jwtToken;
 
@@ -21,9 +28,10 @@ export const getRecipesActionCreator = () => async (dispatch, getState) => {
     const responseImage = recipesArr.map((el) => el.image);
     const responseRecipeLink = recipesArr.map((el) => el.recipeLink);
 
-    console.log(responseLabel);
-    console.log(responseImage);
-    console.log(responseRecipeLink);
+    console.log(`====== recipesArr: ${JSON.stringify(recipesArr)} ======`);
+    console.log(`====== responseLabel: ${responseLabel} ======`);
+    console.log(`====== responseImage: ${responseImage} ======`);
+
     dispatch({
       type: GET_RECIPES,
       payload: {
@@ -42,11 +50,13 @@ export const reducer = (state = initialState, action) => {
     case GET_RECIPES:
       return {
         ...state,
-        recipesArr: {
-          label: action.payload.label,
-          image: action.payload.image,
-          imageUrl: action.payload.imageUrl,
-        },
+        recipesArr: [
+          {
+            label: action.payload.label,
+            image: action.payload.image,
+            imageUrl: action.payload.imageUrl,
+          },
+        ],
       };
 
     default:

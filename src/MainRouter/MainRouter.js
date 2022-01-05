@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,14 +23,14 @@ const MainRouter = () => {
       <Header />
       <ToastContainer />
       <Routes>
-        <Route exact path='/favorites' element={FavoriteRecipes} />
-        <Route exact path='/sign-up' element={SignUp} />
-        <Route exact path='/error2' element={ErrorPage2} />
-        <Route exact path='/guest-search' element={NotAuthHome} />
-        <Route exact path='/error' element={ErrorPage} />
-        <Route exact path='/login' element={Login} />
-        <Route exact path='/home' element={AuthHome} />
-        <Route exact path='/' element={Login} />
+        <Route exact path='/favorites' element={<FavoriteRecipes />} />
+        <Route exact path='/sign-up' element={<SignUp />} />
+        <Route exact path='/error2' element={<ErrorPage2 />} />
+        <Route exact path='/guest-search' element={<NotAuthHome />} />
+        <Route exact path='/error' element={<ErrorPage />} />
+        <Route exact path='/login' element={<Login />} />
+        <Route exact path='/home' element={<AuthHome />} />
+        <Route exact path='/' element={<Login />} />
       </Routes>
       <Footer />
     </>
