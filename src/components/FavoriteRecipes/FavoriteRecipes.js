@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Box } from "@material-ui/core";
+import { Box, Container, Grid } from "@material-ui/core";
 import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
-import DisplayFavoriteRecipes from "./DisplayFavoriteRecipes";
+import DisplayFavoriteRecipes from "./DisplayFavoriteRecipeCards";
 
 const FavoriteRecipes = () => {
   const navigate = useNavigate();
 
   // getting called before the array is actually populated
   const recipesArr = useSelector((state) => state.favoriteRecipes.recipesArr);
+
+  console.log(`====== recipesArr ======`);
+  console.log(recipesArr);
 
   const usrToken = useSelector((state) => state.login.jwtToken);
 
@@ -20,19 +23,15 @@ const FavoriteRecipes = () => {
   }, []);
 
   return (
-    <div>
-      <Box
-        display='flex'
-        flexDirection='row'
-        flexWrap='wrap'
-        justifyContent='center'
-        bgcolor='#78fff1'
-      >
-        {recipesArr.map((recipe, idx) => (
-          <DisplayFavoriteRecipes recipe={recipe} key={idx} />
+    <Container>
+      <Grid container justify-items='center'>
+        {recipesArr.map((recipe, _id) => (
+          <Grid key={_id}>
+            <DisplayFavoriteRecipes recipe={recipe} id={_id} />
+          </Grid>
         ))}
-      </Box>
-    </div>
+      </Grid>
+    </Container>
   );
 };
 

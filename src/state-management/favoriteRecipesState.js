@@ -6,16 +6,14 @@ export const REMOVE_FAVORITE = "codeImmersives/removeFavorite";
 export const initialState = {
   recipesArr: [
     {
-      label: "",
-      image: "",
-      recipeLink: "",
+      recipes: [],
     },
   ],
 };
 
 export const getRecipesActionCreator = () => async (dispatch, getState) => {
   try {
-    console.log(`====== getRecipesActionCreator ran ======`);
+    // console.log(`====== getRecipesActionCreator ran ======`);
     const currentState = getState();
     const token = currentState.login.jwtToken;
 
@@ -23,21 +21,10 @@ export const getRecipesActionCreator = () => async (dispatch, getState) => {
       headers: { authorization: `Bearer ${token}` },
     });
 
-    const recipesArr = response.data.payload;
-    const responseLabel = recipesArr.map((el) => el.label);
-    const responseImage = recipesArr.map((el) => el.image);
-    const responseRecipeLink = recipesArr.map((el) => el.recipeLink);
-
-    console.log(`====== recipesArr: ${JSON.stringify(recipesArr)} ======`);
-    console.log(`====== responseLabel: ${responseLabel} ======`);
-    console.log(`====== responseImage: ${responseImage} ======`);
-
     dispatch({
       type: GET_RECIPES,
       payload: {
-        label: responseLabel,
-        image: responseImage,
-        imageUrl: responseRecipeLink,
+        recipes: response.data.recipes,
       },
     });
   } catch (err) {
@@ -52,9 +39,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         recipesArr: [
           {
-            label: action.payload.label,
-            image: action.payload.image,
-            imageUrl: action.payload.imageUrl,
+            recipes: action.payload.recipes,
           },
         ],
       };

@@ -6,6 +6,7 @@ import {
   Button,
   TextField,
   ThemeProvider,
+  Box,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +51,7 @@ const AuthHome = () => {
   return (
     <div
       style={{ textAlign: "center", backgroundColor: "#99cccc" }}
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={(event) => event.preventDefault()}
     >
       <ThemeProvider theme={theme}>
         <form
@@ -64,9 +65,9 @@ const AuthHome = () => {
             label='Outlined'
             variant='outlined'
             style={{
-              backgroundColor: "#ffffff",
+              backgroundColor: "#FFFFFF",
               border: "black solid 1px",
-              marginTop: "75px",
+              marginTop: "10%",
             }}
             onChange={(event) => setUsrInput(event.target.value)}
           />
@@ -86,6 +87,14 @@ const AuthHome = () => {
       <div>
         <IndividualCards />
       </div>
+      <Box display='flex' justifyContent='space-evenly'>
+        <Button variant='contained' color='#ffffff'>
+          Previous
+        </Button>
+        <Button variant='contained' color='#ffffff'>
+          Next
+        </Button>
+      </Box>
     </div>
   );
 };

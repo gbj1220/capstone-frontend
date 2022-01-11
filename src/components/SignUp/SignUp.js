@@ -11,6 +11,7 @@ import {
   Grid,
   TextField,
   Typography,
+  Box,
 } from "@material-ui/core";
 import { addUserActionCreator } from "../../state-management/signUpState";
 
@@ -77,9 +78,11 @@ const Login = () => {
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component='h1' variant='h5'>
-          Sign up
-        </Typography>
+        <Box mt={10}>
+          <Typography component='h1' variant='h5'>
+            Sign up
+          </Typography>
+        </Box>
         <form
           className={classes.form}
           noValidate

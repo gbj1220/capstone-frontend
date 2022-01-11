@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
     bottom: 0,
     height: 50,
     backgroundColor: "#505050",
+    marginTop: "30",
   },
 }));
 
@@ -15,9 +16,11 @@ const Footer = () => {
   return (
     <>
       <footer className={classes.footer}>
-        <AppBar position='fixed' color='primary' className={classes.appBar}>
-          <Typography variant='h6' align='center' gutterBottom />
-        </AppBar>
+        <AppBar
+          position='fixed'
+          color='primary'
+          className={classes.appBar}
+        ></AppBar>
       </footer>
     </>
   );

@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
   cardGrid: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    width: "25%",
+    marginBottom: "5%",
   },
   card: {
     margin: "20px",
@@ -46,24 +49,23 @@ const useStyles = makeStyles((theme) => ({
     color: "#78fff1",
   },
   cardButtons: {
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignContent: "center",
-    padding: "10px",
-    margin: "10px",
+    padding: "5%",
+    margin: "5%",
   },
   save_btn: {
     borderRadius: "10px",
-    "&:hover": {
-      border: "2px solid white",
-      borderRadius: "10px",
-    },
+    // How can I make this work without the entire page shifting around?
+    // "&:hover": {
+    //   border: "1px solid white",
+    // },
   },
   link_btn: {
     borderRadius: "10px",
-    "&:hover": {
-      border: "2px solid white",
-      borderRadius: "10px",
-    },
+    // "&:hover": {
+    //   border: "1px solid white",
+    // },
   },
   itemPic: {},
 }));

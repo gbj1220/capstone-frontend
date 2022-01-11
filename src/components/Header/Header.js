@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import { logoutActionCreator } from "../../state-management/loginState";
 import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
-import { checkPropTypes } from "prop-types";
 
 const theme = createTheme({
   palette: {
@@ -46,9 +45,7 @@ const useStyles = makeStyles(() => ({
     color: "#78FFF1",
     border: "2px solid #78FFF1",
   },
-  appBar: {
-    position: "fixed",
-  },
+  appBar: {},
 }));
 
 const ButtonAppBar = () => {
@@ -62,9 +59,9 @@ const ButtonAppBar = () => {
 
   const checkIfAuth = () =>
     usrToken ? (
-      <Box flexGrow={1}>
+      <Box flexGrow={1} mb={10}>
         <ThemeProvider theme={theme}>
-          <AppBar position='fixed' className={classes.appBar}>
+          <AppBar className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
               <Button
                 className={classes.title}
@@ -94,32 +91,36 @@ const ButtonAppBar = () => {
         </ThemeProvider>
       </Box>
     ) : (
-      <Box>
+      <Box flexGrow={1}>
         <ThemeProvider theme={theme}>
-          <AppBar>
-            <Toolbar className={classes.toolbar}>
-              <Button
-                className={classes.title}
-                onClick={() => navigate("/guest-search")}
-              >
-                Recipe Finder
-              </Button>
-              <div>
-                <Button
-                  className={classes.goToSignUpBtn}
-                  onClick={() => navigate("/sign-up")}
-                >
-                  Sign Up
-                </Button>
-                <Button
-                  className={classes.logInBtn}
-                  onClick={() => navigate("/login")}
-                >
-                  Login
-                </Button>
-              </div>
-            </Toolbar>
-          </AppBar>
+          <Box>
+            <AppBar className={classes.appBar}>
+              <Box>
+                <Toolbar className={classes.toolbar}>
+                  <Button
+                    className={classes.title}
+                    onClick={() => navigate("/guest-search")}
+                  >
+                    Recipe Finder
+                  </Button>
+                  <div>
+                    <Button
+                      className={classes.goToSignUpBtn}
+                      onClick={() => navigate("/sign-up")}
+                    >
+                      Sign Up
+                    </Button>
+                    <Button
+                      className={classes.logInBtn}
+                      onClick={() => navigate("/login")}
+                    >
+                      Login
+                    </Button>
+                  </div>
+                </Toolbar>
+              </Box>
+            </AppBar>
+          </Box>
         </ThemeProvider>
       </Box>
     );

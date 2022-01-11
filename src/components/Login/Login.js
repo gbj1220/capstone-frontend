@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Box,
   Button,
   CssBaseline,
   Grid,
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: "100%", // Fix IE 11 issue.
+    height: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -75,23 +77,23 @@ const Login = () => {
   }, [jwtToken]);
 
   return (
-    <Grid container component='main' className={classes.root}>
+    <Box container component='main' className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
+      <div className={classes.paper}>
+        <Box mt={10}>
           <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
+        </Box>
 
-          <div className={classes.errMsg}>
-            {errMsg && errMsg.length > 0 ? <h4>{errMsg}</h4> : null}
-          </div>
-
+        <div className={classes.errMsg}>
+          {errMsg && errMsg.length > 0 ? <h4>{errMsg}</h4> : null}
+        </div>
+        <Box>
           <form
             className={classes.form}
             noValidate
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={(event) => event.preventDefault()}
           >
             <TextField
               variant='outlined'
@@ -132,11 +134,11 @@ const Login = () => {
               Sign In
             </Button>
 
-            <Grid container />
+            <Box container />
           </form>
-        </div>
-      </Grid>
-    </Grid>
+        </Box>
+      </div>
+    </Box>
   );
 };
 

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { callRecipeApiActionCreator } from "../../state-management/searchState";
+import IndividualCards from "../IndividualCards/IndividualCards";
 import {
   Button,
   TextField,
@@ -7,9 +9,6 @@ import {
   createTheme,
   makeStyles,
 } from "@material-ui/core";
-
-import { callRecipeApiActionCreator } from "../../state-management/searchState";
-import IndividualCards from "../IndividualCards/IndividualCards";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +44,7 @@ const NotAuthHome = () => {
   /* returning a TextField with a button underneath so that a non-authorized
      user can search for a recipe */
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", backgroundColor: "#99cccc" }}>
       <ThemeProvider theme={theme}>
         <form
           className={classes.root}
@@ -58,6 +57,11 @@ const NotAuthHome = () => {
             label='Outlined'
             variant='outlined'
             onChange={(event) => setUsrInput(event.target.value)}
+            style={{
+              backgroundColor: "#FFFFFF",
+              border: "black solid 1px",
+              marginTop: "10%",
+            }}
           />
           <br />
 
