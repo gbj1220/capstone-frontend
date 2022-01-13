@@ -22,80 +22,53 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: "700px",
     },
   },
-  submitBtn: {
-    width: "150px",
-  },
 }));
 
-const AuthHome = () => {
+export default function AuthHome() {
   const classes = useStyles();
-
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const usrToken = useSelector((state) => state.login.jwtToken);
-
   const [usrInput, setUsrInput] = useState("");
-
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#595959",
-      },
-    },
-  });
 
   useEffect(() => !usrToken && navigate("/login"));
 
   return (
-    <div
-      style={{ textAlign: "center", backgroundColor: "#99cccc" }}
-      onSubmit={(event) => event.preventDefault()}
-    >
-      <ThemeProvider theme={theme}>
-        <form
-          className={classes.root}
-          noValidate
-          autoComplete='off'
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <TextField
-            id='outlined-basic'
-            label='Outlined'
-            variant='outlined'
-            style={{
-              backgroundColor: "#FFFFFF",
-              border: "black solid 1px",
-              marginTop: "10%",
-            }}
-            onChange={(event) => setUsrInput(event.target.value)}
-          />
-          <br />
+    <Box textAlign='center' onSubmit={(event) => event.preventDefault()}>
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete='off'
+        onSubmit={(event) => event.preventDefault()}
+      >
+        <TextField
+          id='outlined-basic'
+          label='Search For A Recipe'
+          variant='outlined'
+          style={{
+            backgroundColor: "#FFFFFF",
+            border: "black solid 1px",
+            marginTop: "5%",
+          }}
+          onChange={(event) => setUsrInput(event.target.value)}
+        />
+        <br />
 
-          <Button
-            className={classes.submitBtn}
-            variant='contained'
-            color='primary'
-            type='submit'
-            onClick={() => dispatch(callRecipeApiActionCreator(usrInput))}
-          >
-            Submit
-          </Button>
-        </form>
-      </ThemeProvider>
+        <Button
+          className={classes.submitBtn}
+          variant='contained'
+          color='primary'
+          type='submit'
+          style={{ width: "150px", marginBottom: "5%" }}
+          onClick={() => dispatch(callRecipeApiActionCreator(usrInput))}
+        >
+          Submit
+        </Button>
+      </form>
+
       <div>
         <IndividualCards />
       </div>
-      <Box display='flex' justifyContent='space-evenly'>
-        <Button variant='contained' color='#ffffff'>
-          Previous
-        </Button>
-        <Button variant='contained' color='#ffffff'>
-          Next
-        </Button>
-      </Box>
-    </div>
+    </Box>
   );
-};
-export default AuthHome;
+}

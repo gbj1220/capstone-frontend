@@ -11,12 +11,12 @@ require("dotenv").config();
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#78FFF1",
+      main: "#009688",
     },
   },
 });
 
-const App = () => {
+export default function App() {
   return (
     <>
       <Provider store={reduxStore}>
@@ -28,6 +28,4 @@ const App = () => {
       </Provider>
     </>
   );
-};
-
-export default App;
+}

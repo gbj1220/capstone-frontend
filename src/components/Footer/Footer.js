@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, AppBar, Typography } from "@material-ui/core";
+import { makeStyles, AppBar, Typography, Box } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -7,11 +7,11 @@ const useStyles = makeStyles(() => ({
     bottom: 0,
     height: 50,
     backgroundColor: "#505050",
-    marginTop: "30",
+    position: "default",
   },
 }));
 
-const Footer = () => {
+export default function Footer() {
   const classes = useStyles();
   return (
     <>
@@ -24,6 +24,4 @@ const Footer = () => {
       </footer>
     </>
   );
-};
-
-export default Footer;
+}

@@ -17,7 +17,7 @@ const ErrorPage2 = React.lazy(() =>
   import("../components/ErrorPage/ErrorPage")
 );
 
-const MainRouter = () => {
+export default function MainRouter() {
   return (
     <>
       <Header />
@@ -35,6 +35,4 @@ const MainRouter = () => {
       <Footer />
     </>
   );
-};
-
-export default MainRouter;
+}

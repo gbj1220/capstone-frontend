@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./ErrorPage.css";
 
-const ErrorPage2 = () => {
+export default function ErrorPage2() {
   const navigate = useNavigate();
   return (
     <div className='error-message-non-user-search'>
@@ -18,6 +18,4 @@ const ErrorPage2 = () => {
       </Button>
     </div>
   );
-};
-
-export default ErrorPage2;
+}

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NotAuthHome = () => {
+export default function NotAuthHome() {
   // material-ui object being set to a variable to be used to alter css in material-ui
   const classes = useStyles();
 
@@ -81,6 +81,4 @@ const NotAuthHome = () => {
       </div>
     </div>
   );
-};
-
-export default NotAuthHome;
+}

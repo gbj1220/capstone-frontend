@@ -5,7 +5,7 @@ import { Box, Container, Grid } from "@material-ui/core";
 import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
 import DisplayFavoriteRecipes from "./DisplayFavoriteRecipeCards";
 
-const FavoriteRecipes = () => {
+export default function FavoriteRecipes() {
   const navigate = useNavigate();
 
   // getting called before the array is actually populated
@@ -23,16 +23,16 @@ const FavoriteRecipes = () => {
   }, []);
 
   return (
-    <Container>
-      <Grid container justify-items='center'>
-        {recipesArr.map((recipe, _id) => (
-          <Grid key={_id}>
-            <DisplayFavoriteRecipes recipe={recipe} id={_id} />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <Box>
+      <Container>
+        <Grid container justify-items='center'>
+          {recipesArr.map((recipe, _id) => (
+            <Grid key={_id}>
+              <DisplayFavoriteRecipes recipe={recipe} id={_id} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
   );
-};
-
-export default FavoriteRecipes;
+}

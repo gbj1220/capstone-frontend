@@ -1,7 +1,7 @@
 import { AppBar, Box, Button, Toolbar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, makeStyles } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
+import { StylesContext, ThemeProvider } from "@material-ui/styles";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { logoutActionCreator } from "../../state-management/loginState";
@@ -45,21 +45,23 @@ const useStyles = makeStyles(() => ({
     color: "#78FFF1",
     border: "2px solid #78FFF1",
   },
-  appBar: {},
+  appBar: {
+    position: "fixed",
+  },
+  spacer: {
+    width: "100%",
+    height: "100px",
+  },
 }));
 
-const ButtonAppBar = () => {
+export default function ButtonAppBar() {
   const classes = useStyles();
-
   const usrToken = useSelector((state) => state.login.jwtToken);
-
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const checkIfAuth = () =>
     usrToken ? (
-      <Box flexGrow={1} mb={10}>
+      <Box flexGrow={1}>
         <ThemeProvider theme={theme}>
           <AppBar className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
@@ -89,6 +91,7 @@ const ButtonAppBar = () => {
             </Toolbar>
           </AppBar>
         </ThemeProvider>
+        <Box className={classes.spacer} />
       </Box>
     ) : (
       <Box flexGrow={1}>
@@ -125,6 +128,4 @@ const ButtonAppBar = () => {
       </Box>
     );
   return checkIfAuth();
-};
-
-export default ButtonAppBar;
+}

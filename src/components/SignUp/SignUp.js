@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+export default function Login() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -162,6 +162,4 @@ const Login = () => {
       </div>
     </Container>
   );
-};
-
-export default Login;
+}

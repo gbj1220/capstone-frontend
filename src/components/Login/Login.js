@@ -4,8 +4,6 @@ import {
   Box,
   Button,
   CssBaseline,
-  Grid,
-  Paper,
   TextField,
   Typography,
 } from "@material-ui/core/";
@@ -50,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+export default function Login() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -124,10 +122,10 @@ const Login = () => {
             />
 
             <Button
+              color='primary'
               type='submit'
               fullWidth
               variant='contained'
-              color='primary'
               className={classes.submit}
               onClick={() => dispatch(logInActionCreator(username, password))}
             >
@@ -140,6 +138,4 @@ const Login = () => {
       </div>
     </Box>
   );
-};
-
-export default Login;
+}

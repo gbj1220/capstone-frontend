@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { saveRecipeActionCreator } from "../../state-management/recipeState";
+import { string } from "prop-types";
 import {
   Box,
   Button,
@@ -11,85 +12,31 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Grid,
+  Paper,
   Typography,
 } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    width: "25%",
-    marginBottom: "5%",
-  },
-  card: {
-    margin: "20px",
-    boxShadow: "0 2px 20px black",
-    borderRadius: "10px",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#505050",
-    maxWidth: "300px",
-  },
-  cardMedia: {
-    padding: "50%",
-  },
-  cardTitle: {
-    flexGrow: 1,
-    color: "#78fff1",
-  },
-  cardButtons: {
-    justifyContent: "space-evenly",
-    alignContent: "center",
-    padding: "5%",
-    margin: "5%",
-  },
-  save_btn: {
-    borderRadius: "10px",
-    // How can I make this work without the entire page shifting around?
-    // "&:hover": {
-    //   border: "1px solid white",
-    // },
-  },
-  link_btn: {
-    borderRadius: "10px",
-    // "&:hover": {
-    //   border: "1px solid white",
-    // },
-  },
-  itemPic: {},
-}));
+const useStyles = makeStyles((theme) => ({}));
 
-const CardComponent = (props) => {
-  const { hit, key } = props;
+export default function CardComponent({ hit }) {
   const classes = useStyles();
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const jwtToken = useSelector((state) => state.login.jwtToken);
+  const usrToken = useSelector((state) => state.login.jwtToken);
 
   const { label } = hit.recipe;
   const { image } = hit.recipe;
-  const recipeLink = hit.recipe.url;
-  const linkString = String(recipeLink);
+  const { url } = hit.recipe;
 
-  const handleOnClick = () => {
-    dispatch(saveRecipeActionCreator(label, image, recipeLink));
+  const saveRecipe = () => {
+    dispatch(saveRecipeActionCreator(label, image, url));
     toast("Added to favorite recipes!", {
-      position: "top-right",
-      autoClose: 2000,
+      position: "top-left",
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -98,75 +45,40 @@ const CardComponent = (props) => {
     });
   };
 
-  return (
-    <>
-      <Box key={key} className={classes.cardGrid}>
-        <Card className={classes.card}>
-          <CardMedia
-            className={classes.cardMedia}
-            image={image}
-            title='Image title'
-          />
+  React.useEffect(() => !usrToken && navigate("/login"));
 
-          <CardContent className={classes.cardTitle}>
-            <Typography gutterBottom variant='h5' component='h5'>
+  return (
+    <Grid item>
+      <Paper elevation={10}>
+        <Card sx={{ maxWidth: 345 }}>
+          <CardMedia
+            component='img'
+            height='140'
+            image={image}
+            alt='green iguana'
+          />
+          <CardContent>
+            <Typography gutterBottom variant='h5' component='div'>
               {label}
             </Typography>
           </CardContent>
-          <CardActions className={classes.cardButtons}>
-            {jwtToken ? (
-              <>
-                <Box className={classes.link_btn}>
-                  <Button
-                    variant='outlined'
-                    size='small'
-                    color='primary'
-                    onClick={() => {
-                      window.open(linkString);
-                    }}
-                  >
-                    Link to Recipe
-                  </Button>
-                </Box>
-                <div className={classes.save_btn}>
-                  <Button
-                    variant='outlined'
-                    size='small'
-                    color='primary'
-                    onClick={() => handleOnClick(label, image, recipeLink)}
-                  >
-                    Save to Favorites
-                  </Button>
-                </div>
-              </>
-            ) : (
-              <>
-                <Button
-                  size='small'
-                  color='primary'
-                  onClick={() => navigate("/error")}
-                >
-                  View Recipe
-                </Button>
-                <Button
-                  size='small'
-                  color='primary'
-                  onClick={() => navigate("/error2")}
-                >
-                  Save to Favorites
-                </Button>
-              </>
-            )}
-          </CardActions>
+          <Box display='flex' justifyContent='center'>
+            <CardActions>
+              <Button
+                onClick={() => saveRecipe(label, image, url)}
+                size='small'
+              >
+                Save to Favorites
+              </Button>
+              <Button onClick={() => window.open(url)} size='small'>
+                View Recipe
+              </Button>
+            </CardActions>
+          </Box>
         </Card>
-      </Box>
-    </>
+      </Paper>
+    </Grid>
   );
-};
+}
 
-CardComponent.propTypes = {
-  label: String.isRequired,
-  image: String.isRequired,
-}.isRequired;
-
-export default CardComponent;
+CardComponent.propTypes = {}.isRequired;
