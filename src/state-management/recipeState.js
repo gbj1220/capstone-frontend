@@ -26,7 +26,9 @@ export const saveRecipeActionCreator =
           image,
           recipeLink,
         },
-        { headers: { authorization: `Bearer ${jwtToken}` } }
+        {
+          headers: { authorization: `Bearer ${jwtToken}` },
+        }
       );
       dispatch({
         type: SAVE_RECIPE,

@@ -11,9 +11,6 @@ export default function FavoriteRecipes() {
   // getting called before the array is actually populated
   const recipesArr = useSelector((state) => state.favoriteRecipes.recipesArr);
 
-  console.log(`====== recipesArr ======`);
-  console.log(recipesArr);
-
   const usrToken = useSelector((state) => state.login.jwtToken);
 
   const dispatch = useDispatch();
@@ -23,16 +20,14 @@ export default function FavoriteRecipes() {
   }, []);
 
   return (
-    <Box>
-      <Container>
-        <Grid container justify-items='center'>
-          {recipesArr.map((recipe, _id) => (
-            <Grid key={_id}>
-              <DisplayFavoriteRecipes recipe={recipe} id={_id} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </Box>
+    <Container>
+      <Grid container justify-items='center'>
+        {recipesArr.map((recipe, i) => (
+          <Grid key={i}>
+            <DisplayFavoriteRecipes recipe={recipe} idx={i} />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }

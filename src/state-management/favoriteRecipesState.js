@@ -1,7 +1,7 @@
 import Axios from "../components/Axios/Axios";
 
 export const GET_RECIPES = "codeImmersives/getRecipe";
-export const REMOVE_FAVORITE = "codeImmersives/removeFavorite";
+export const DELETE_RECIPE = "codeImmersives/deleteRecipe";
 
 export const initialState = {
   recipesArr: [
@@ -13,7 +13,7 @@ export const initialState = {
 
 export const getRecipesActionCreator = () => async (dispatch, getState) => {
   try {
-    // console.log(`====== getRecipesActionCreator ran ======`);
+    // console.log(`====== getRecipesActionCreator ran!! ======`);
     const currentState = getState();
     const token = currentState.login.jwtToken;
 
@@ -32,9 +32,44 @@ export const getRecipesActionCreator = () => async (dispatch, getState) => {
   }
 };
 
+export const removeRecipesActionCreator =
+  (id) => async (dispatch, getState) => {
+    try {
+      const currentState = getState();
+      const token = currentState.login.jwtToken;
+
+      const response = await Axios.post(
+        "/users/delete-recipe",
+        { id },
+        { headers: { authorization: `Bearer ${token}` } }
+      );
+
+      console.log(response);
+
+      dispatch({
+        type: DELETE_RECIPE,
+        payload: {
+          recipes: response.data.recipes,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_RECIPES:
+      return {
+        ...state,
+        recipesArr: [
+          {
+            recipes: action.payload.recipes,
+          },
+        ],
+      };
+
+    case DELETE_RECIPE:
       return {
         ...state,
         recipesArr: [
