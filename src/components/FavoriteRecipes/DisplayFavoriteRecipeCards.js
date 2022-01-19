@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { teal } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Button, Grid } from "@material-ui/core";
+import { Box, Button, Grid } from "@material-ui/core";
 import { removeRecipesActionCreator } from "../../state-management/favoriteRecipesState";
 import { useDispatch } from "react-redux";
 
@@ -61,7 +61,7 @@ export default function DisplayFavoriteRecipeCards({ recipe }) {
                 image={recipe.image}
                 alt='Paella dish'
               />
-              <CardActions>
+              <Box textAlign='center' paddingBottom={1} paddingTop={1}>
                 <Button onClick={() => window.open(recipe.recipeLink)}>
                   View Recipe
                 </Button>
@@ -72,7 +72,7 @@ export default function DisplayFavoriteRecipeCards({ recipe }) {
                 >
                   Remove Recipe
                 </Button>
-              </CardActions>
+              </Box>
               <Collapse in={expanded} timeout='auto' unmountOnExit></Collapse>
             </Card>
           </Grid>

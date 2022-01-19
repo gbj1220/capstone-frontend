@@ -20,14 +20,12 @@ export default function FavoriteRecipes() {
   }, []);
 
   return (
-    <Container>
-      <Grid container justify-items='center'>
-        {recipesArr.map((recipe, i) => (
-          <Grid key={i}>
-            <DisplayFavoriteRecipes recipe={recipe} idx={i} />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <Box justifyItems='center'>
+      {recipesArr.map((recipe, i) => (
+        <Box key={i}>
+          <DisplayFavoriteRecipes recipe={recipe} idx={i} />
+        </Box>
+      ))}
+    </Box>
   );
 }
