@@ -43,7 +43,7 @@ export const removeRecipesActionCreator =
         { id },
         { headers: { authorization: `Bearer ${token}` } }
       );
-
+      console.log(`====== RESPONSE ======`);
       console.log(response);
 
       dispatch({
