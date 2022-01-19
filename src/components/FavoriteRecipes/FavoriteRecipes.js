@@ -11,9 +11,6 @@ const FavoriteRecipes = () => {
   // getting called before the array is actually populated
   const recipesArr = useSelector((state) => state.favoriteRecipes.recipesArr);
 
-  console.log(`====== recipesArr ======`);
-  console.log(recipesArr);
-
   const usrToken = useSelector((state) => state.login.jwtToken);
 
   const dispatch = useDispatch();
@@ -25,9 +22,9 @@ const FavoriteRecipes = () => {
   return (
     <Container>
       <Grid container justify-items='center'>
-        {recipesArr.map((recipe, _id) => (
-          <Grid key={_id}>
-            <DisplayFavoriteRecipes recipe={recipe} id={_id} />
+        {recipesArr.map((recipe, i) => (
+          <Grid key={i}>
+            <DisplayFavoriteRecipes recipe={recipe} idx={i} />
           </Grid>
         ))}
       </Grid>
