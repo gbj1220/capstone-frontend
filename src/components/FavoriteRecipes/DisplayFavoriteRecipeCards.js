@@ -9,7 +9,7 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
+import { teal } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Button, Grid } from "@material-ui/core";
 import { removeRecipesActionCreator } from "../../state-management/favoriteRecipesState";
@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const DisplayFavoriteRecipeCards = ({ recipe }) => {
+export default function DisplayFavoriteRecipeCards({ recipe }) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -43,7 +43,7 @@ const DisplayFavoriteRecipeCards = ({ recipe }) => {
             <Card sx={{ maxWidth: 345 }}>
               <CardHeader
                 avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
+                  <Avatar sx={{ bgcolor: teal[500] }} aria-label='recipe'>
                     R
                   </Avatar>
                 }
@@ -62,7 +62,9 @@ const DisplayFavoriteRecipeCards = ({ recipe }) => {
                 alt='Paella dish'
               />
               <CardActions>
-                <Button>View Recipe</Button>
+                <Button onClick={() => window.open(recipe.recipeLink)}>
+                  View Recipe
+                </Button>
                 <Button
                   onClick={() =>
                     dispatch(removeRecipesActionCreator(recipe._id))
@@ -78,6 +80,6 @@ const DisplayFavoriteRecipeCards = ({ recipe }) => {
       })}
     </Grid>
   );
-};
+}
 
 DisplayFavoriteRecipeCards.propTypes = {}.isRequired;
