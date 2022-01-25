@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { saveRecipeActionCreator } from "../../state-management/recipeState";
-import { string } from "prop-types";
+import PropTypes from "prop-types";
 import {
   Box,
   Button,

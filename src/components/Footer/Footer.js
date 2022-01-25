@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, AppBar, Typography, Box } from "@material-ui/core";
+import { makeStyles, AppBar, Box } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -7,14 +7,14 @@ const useStyles = makeStyles(() => ({
     bottom: 0,
     height: 50,
     backgroundColor: "#505050",
-    position: "default",
+    position: "fixed",
   },
 }));
 
 export default function Footer() {
   const classes = useStyles();
   return (
-    <>
+    <Box>
       <footer className={classes.footer}>
         <AppBar
           position='fixed'
@@ -22,6 +22,6 @@ export default function Footer() {
           className={classes.appBar}
         ></AppBar>
       </footer>
-    </>
+    </Box>
   );
 }

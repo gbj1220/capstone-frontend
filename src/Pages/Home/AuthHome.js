@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 import { callRecipeApiActionCreator } from "../../state-management/searchState";
 
-import IndividualCards from "../IndividualCards/IndividualCards";
+import IndividualCards from "../../Components/IndividualCards/IndividualCards";
 
 const useStyles = makeStyles((theme) => ({
   root: {

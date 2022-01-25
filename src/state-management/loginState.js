@@ -1,10 +1,10 @@
-import Axios from '../components/Axios/Axios';
+import Axios from "../Components/Axios/Axios";
 
-export const LOG_IN = 'codeImmersives/sign-in';
-export const LOG_OUT = 'codeImmersives/logout';
-export const LOG_IN_ERROR = 'codeImmersives/logInError';
+export const LOG_IN = "codeImmersives/sign-in";
+export const LOG_OUT = "codeImmersives/logout";
+export const LOG_IN_ERROR = "codeImmersives/logInError";
 
-const token = localStorage.getItem('jwtToken');
+const token = localStorage.getItem("jwtToken");
 
 // declaring the initial state
 
@@ -12,20 +12,20 @@ export const initialState = {
   user: null,
   jwtToken: token || null,
   error: {
-    msg: '',
+    msg: "",
   },
 };
 
 export const logInActionCreator = (username, password) => async (dispatch) => {
   // calling my backend to do checks on login info and log them in or not
   try {
-    const response = await Axios.post('/users/login', {
+    const response = await Axios.post("/users/login", {
       username,
       password,
     });
 
     // setting jwtToken into localStorage so that I can grab it and put it into redux state
-    localStorage.setItem('jwtToken', response.data.jwtToken);
+    localStorage.setItem("jwtToken", response.data.jwtToken);
     dispatch({
       type: LOG_IN,
       payload: {
@@ -44,7 +44,7 @@ export const logInActionCreator = (username, password) => async (dispatch) => {
 // creating a function to log the user out
 export const logoutActionCreator = (dispatch) => {
   try {
-    const removedToken = localStorage.removeItem('jwtToken');
+    const removedToken = localStorage.removeItem("jwtToken");
 
     dispatch({
       type: LOG_OUT,

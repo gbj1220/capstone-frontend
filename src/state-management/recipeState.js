@@ -1,4 +1,4 @@
-import Axios from "../components/Axios/Axios";
+import Axios from "../Components/Axios/Axios";
 
 export const SAVE_RECIPE = "codeImmersives/saveRecipe";
 
