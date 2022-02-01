@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -24,20 +23,22 @@ export default function DisplayFavoriteRecipeCards({ recipe }) {
         return (
           <Grid item key={recipe._id} xs={12} sm={6} md={4} lg={3}>
             <Card sx={{ maxWidth: 345 }}>
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: teal[500] }} aria-label='recipe'>
-                    R
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label='settings'>
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-                title={recipe.label}
-                subheader={Date()}
-              />
+              <Typography variant='h3'>
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ bgcolor: teal[500] }} aria-label='recipe'>
+                      R
+                    </Avatar>
+                  }
+                  action={
+                    <IconButton aria-label='settings'>
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  title={recipe.label}
+                  subheader={Date()}
+                />
+              </Typography>
               <CardMedia
                 component='img'
                 height='194'

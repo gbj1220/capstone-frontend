@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { callRecipeApiActionCreator } from "../../state-management/searchState";
-import IndividualCards from "../IndividualCards/IndividualCards";
+import IndividualCards from "../../components/IndividualCards/IndividualCards";
 import {
   Button,
   TextField,

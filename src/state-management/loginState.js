@@ -1,4 +1,4 @@
-import Axios from "../Components/Axios/Axios";
+import Axios from "../components/Axios/Axios";
 
 export const LOG_IN = "codeImmersives/sign-in";
 export const LOG_OUT = "codeImmersives/logout";

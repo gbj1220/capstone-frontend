@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Box, Container, Grid } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { getRecipesActionCreator } from "../../state-management/favoriteRecipesState";
 import DisplayFavoriteRecipes from "./DisplayFavoriteRecipeCards";
+import { removeRecipesActionCreator } from "../../state-management/favoriteRecipesState";
 
 export default function FavoriteRecipes() {
   const navigate = useNavigate();
@@ -21,9 +22,9 @@ export default function FavoriteRecipes() {
 
   return (
     <Box justifyItems='center'>
-      {recipesArr.map((recipe, i) => (
-        <Box key={i}>
-          <DisplayFavoriteRecipes recipe={recipe} idx={i} />
+      {recipesArr.map((recipe) => (
+        <Box key={recipe._id}>
+          <DisplayFavoriteRecipes recipe={recipe} />
         </Box>
       ))}
     </Box>

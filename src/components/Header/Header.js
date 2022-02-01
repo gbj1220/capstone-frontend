@@ -1,7 +1,7 @@
 import { AppBar, Box, Button, Toolbar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, makeStyles } from "@material-ui/core/styles";
-import { StylesContext, ThemeProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { logoutActionCreator } from "../../state-management/loginState";
@@ -83,7 +83,7 @@ export default function ButtonAppBar() {
                 </Button>
                 <Button
                   className={classes.logout_btn}
-                  onClick={() => dispatch(logoutActionCreator) && navigate("/")}
+                  onClick={() => dispatch(logoutActionCreator)}
                 >
                   Logout
                 </Button>

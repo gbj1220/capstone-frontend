@@ -1,7 +1,10 @@
-import Axios from "../Components/Axios/Axios";
+import jwt_decode from "jwt-decode";
+import Axios from "../components/Axios/Axios";
 
 export const GET_RECIPES = "codeImmersives/getRecipe";
 export const DELETE_RECIPE = "codeImmersives/deleteRecipe";
+export const LOG_OUT = "codeImmersives/logout";
+export const CHECK_AUTH = "codeImmersives/checkAuth";
 
 export const initialState = {
   recipesArr: [
@@ -38,6 +41,10 @@ export const removeRecipesActionCreator =
       const currentState = getState();
       const token = currentState.login.jwtToken;
 
+      const favRecipes = currentState.favoriteRecipes.recipesArr;
+      console.log(`====== FAVORITE RECIPES ======`);
+      console.log(favRecipes);
+
       const response = await Axios.post(
         "/users/delete-recipe",
         { id },
@@ -49,13 +56,30 @@ export const removeRecipesActionCreator =
       dispatch({
         type: DELETE_RECIPE,
         payload: {
-          recipes: response.data.recipes,
+          recipes: response.data.filteredPayload,
         },
       });
     } catch (err) {
       console.log(err);
     }
   };
+
+export const logoutActionCreator = () => async (dispatch, getState) => {
+  try {
+    const currentState = getState();
+    const token = currentState.login.jwtToken;
+    console.log(token);
+
+    dispatch({
+      type: LOG_OUT,
+      payload: {
+        token: null,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -77,6 +101,11 @@ export const reducer = (state = initialState, action) => {
             recipes: action.payload.recipes,
           },
         ],
+      };
+
+    case LOG_OUT:
+      return {
+        ...state,
       };
 
     default:
