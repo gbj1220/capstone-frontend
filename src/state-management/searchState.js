@@ -1,4 +1,4 @@
-import Axios from "../Components/Axios/Axios";
+import Axios from "../components/Axios/Axios";
 
 // creating an action and assigning it to something as a reminder
 export const CALL_RECIPE_API = "codeImmersives/callRecipeApi";

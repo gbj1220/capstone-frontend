@@ -4,18 +4,16 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const FavoriteRecipes = React.lazy(() =>
-  import("../components/FavoriteRecipes/FavoriteRecipes")
+  import("../pages/FavoriteRecipes/FavoriteRecipes")
 );
-const NotAuthHome = React.lazy(() => import("../components/Home/NotAuthHome"));
-const ErrorPage = React.lazy(() => import("../components/ErrorPage/ErrorPage"));
-const AuthHome = React.lazy(() => import("../components/Home/AuthHome"));
-const SignUp = React.lazy(() => import("../components/SignUp/SignUp"));
+const NotAuthHome = React.lazy(() => import("../pages/Home/NotAuthHome"));
+const ErrorPage = React.lazy(() => import("../pages/ErrorPage/ErrorPage"));
+const AuthHome = React.lazy(() => import("../pages/Home/AuthHome"));
+const SignUp = React.lazy(() => import("../pages/SignUp/SignUp"));
 const Header = React.lazy(() => import("../components/Header/Header"));
 const Footer = React.lazy(() => import("../components/Footer/Footer"));
-const Login = React.lazy(() => import("../components/Login/Login"));
-const ErrorPage2 = React.lazy(() =>
-  import("../components/ErrorPage/ErrorPage")
-);
+const Login = React.lazy(() => import("../pages/Login/Login"));
+const ErrorPage2 = React.lazy(() => import("../pages/ErrorPage/ErrorPage"));
 
 export default function MainRouter() {
   return (
