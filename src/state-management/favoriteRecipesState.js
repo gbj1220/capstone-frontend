@@ -1,4 +1,3 @@
-import jwt_decode from "jwt-decode";
 import Axios from "../components/Axios/Axios";
 
 export const GET_RECIPES = "codeImmersives/getRecipe";
