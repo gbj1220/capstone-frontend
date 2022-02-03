@@ -37,12 +37,12 @@ export const getRecipesActionCreator = () => async (dispatch, getState) => {
 export const removeRecipesActionCreator =
   (id) => async (dispatch, getState) => {
     try {
+      console.log(`====== test 1 ======`);
+
       const currentState = getState();
       const token = currentState.login.jwtToken;
 
-      const favRecipes = currentState.favoriteRecipes.recipesArr;
-      console.log(`====== FAVORITE RECIPES ======`);
-      console.log(favRecipes);
+      console.log(`====== test 2 ======`);
 
       const response = await Axios.post(
         "/users/delete-recipe",
@@ -55,7 +55,7 @@ export const removeRecipesActionCreator =
       dispatch({
         type: DELETE_RECIPE,
         payload: {
-          recipes: response.data.filteredPayload,
+          recipes: response.data,
         },
       });
     } catch (err) {
