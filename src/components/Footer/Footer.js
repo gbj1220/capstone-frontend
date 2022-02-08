@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
 export default function Footer() {
   const classes = useStyles();
   return (
-    <Box>
+    <Box margin={10}>
       <footer className={classes.footer}>
         <AppBar
           position='fixed'

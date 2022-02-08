@@ -66,9 +66,9 @@ export default function AuthHome() {
         </Button>
       </form>
 
-      <div>
+      <Box>
         <IndividualCards />
-      </div>
+      </Box>
     </Box>
   );
 }

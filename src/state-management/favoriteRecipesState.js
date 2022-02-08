@@ -6,11 +6,7 @@ export const LOG_OUT = "codeImmersives/logout";
 export const CHECK_AUTH = "codeImmersives/checkAuth";
 
 export const initialState = {
-  recipesArr: [
-    {
-      recipes: [],
-    },
-  ],
+  recipesArr: [],
 };
 
 export const getRecipesActionCreator = () => async (dispatch, getState) => {
@@ -18,11 +14,10 @@ export const getRecipesActionCreator = () => async (dispatch, getState) => {
     // console.log(`====== getRecipesActionCreator ran!! ======`);
     const currentState = getState();
     const token = currentState.login.jwtToken;
-
     const response = await Axios.get("/users/get-recipes", {
       headers: { authorization: `Bearer ${token}` },
     });
-
+    console.log("response.data.recipes: ", response.data.recipes);
     dispatch({
       type: GET_RECIPES,
       payload: {
@@ -37,25 +32,20 @@ export const getRecipesActionCreator = () => async (dispatch, getState) => {
 export const removeRecipesActionCreator =
   (id) => async (dispatch, getState) => {
     try {
-      console.log(`====== test 1 ======`);
-
       const currentState = getState();
       const token = currentState.login.jwtToken;
-
-      console.log(`====== test 2 ======`);
-
       const response = await Axios.post(
         "/users/delete-recipe",
         { id },
         { headers: { authorization: `Bearer ${token}` } }
       );
-      console.log(`====== RESPONSE ======`);
-      console.log(response);
-
+      // console.log("response.data.recipes");
+      // console.log(response.data.recipes);
       dispatch({
         type: DELETE_RECIPE,
         payload: {
-          recipes: response.data,
+          // recipes: response.data.recipes,
+          removedId: id,
         },
       });
     } catch (err) {
@@ -65,10 +55,6 @@ export const removeRecipesActionCreator =
 
 export const logoutActionCreator = () => async (dispatch, getState) => {
   try {
-    const currentState = getState();
-    const token = currentState.login.jwtToken;
-    console.log(token);
-
     dispatch({
       type: LOG_OUT,
       payload: {
@@ -85,28 +71,19 @@ export const reducer = (state = initialState, action) => {
     case GET_RECIPES:
       return {
         ...state,
-        recipesArr: [
-          {
-            recipes: action.payload.recipes,
-          },
-        ],
+        recipesArr: action.payload.recipes,
       };
-
     case DELETE_RECIPE:
       return {
         ...state,
-        recipesArr: [
-          {
-            recipes: action.payload.recipes,
-          },
-        ],
+        recipesArr: state.recipesArr.filter(
+          ({ _id }) => _id !== action.payload.removedId
+        ),
       };
-
     case LOG_OUT:
       return {
         ...state,
       };
-
     default:
       return state;
   }

@@ -9,14 +9,19 @@ export default function IndividualCards() {
 
   return (
     <Container>
-      <Grid container spacing={4} justifyContent='center'>
+      <Grid
+        container
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+        spacing={1}
+      >
         {hits.map((hit, idx) => (
-          <Grid item key={idx} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={idx} sm={6} md={4} lg={3}>
             <CardComponent hit={hit} idx={idx} />
           </Grid>
         ))}
       </Grid>
-      <Box margin={10} />
     </Container>
   );
 }

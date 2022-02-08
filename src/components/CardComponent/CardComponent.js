@@ -47,8 +47,8 @@ export default function CardComponent({ hit }) {
   React.useEffect(() => !usrToken && navigate("/login"));
 
   return (
-    <Grid item>
-      <Paper elevation={10}>
+    <Box>
+      <Paper elevation={5}>
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia
             component='img'
@@ -57,7 +57,13 @@ export default function CardComponent({ hit }) {
             alt='green iguana'
           />
           <CardContent>
-            <Typography gutterBottom variant='h5' component='div'>
+            <Typography
+              variant='body2'
+              whiteSpace='noWrap'
+              textAlign='center'
+              p={3}
+              color='primary'
+            >
               {label}
             </Typography>
           </CardContent>
@@ -76,7 +82,7 @@ export default function CardComponent({ hit }) {
           </Box>
         </Card>
       </Paper>
-    </Grid>
+    </Box>
   );
 }
 
